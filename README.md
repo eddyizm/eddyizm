@@ -17,6 +17,8 @@ Changed directory and activate virtual environment
 
        cd </path/to/new/virtual/environment>  
        Scripts\activate
+       # in bash use this instead
+       source Scripts/activate
        cd </pathToGitProject>
 Install Django and verify version installed
 
