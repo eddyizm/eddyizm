@@ -11,7 +11,7 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=64)
     date = models.DateTimeField()
-    author = models.ForeignKey(Author)
+    author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     body = models.TextField()
  
     def __str__(self):
