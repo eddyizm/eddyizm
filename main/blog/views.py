@@ -1,9 +1,7 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 # Create your views here.
-
-# def index(request):
-#     return HttpResponse("Hello, world. You're at the polls index.")
-
-def Author(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+class HomePageView(TemplateView):
+    def get(self, request, **kwargs):
+        return render(request, 'blog/index.html', context=None)
