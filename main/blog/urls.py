@@ -4,13 +4,6 @@ from blog import views
 
 urlpatterns = [
     url(r'^$', views.HomePageView.as_view()),
+    url(r'^podcasts/', views.podcasts, name='podcasts'),
 ]
-'''
-from django.urls import path
 
-from . import views
-
-urlpatterns = [
-    #path('', views.index, name='index'),
-]
-'''
