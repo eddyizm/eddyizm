@@ -2,6 +2,16 @@ from django.shortcuts import render, render_to_response, redirect
 from django.views.generic import TemplateView
 
 # Create your views here.
+def blog(request):
+    return render(
+        request,
+        'blog/blog.html',
+        {
+            'title':'Blog',
+            #'message':'Your application description page.',
+            #'year':datetime.now().year,
+        }
+    )
 class HomePageView(TemplateView):
     def get(self, request, **kwargs):
         return render(request, 'blog/index.html', context=None)
