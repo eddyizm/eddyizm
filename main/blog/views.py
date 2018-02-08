@@ -12,9 +12,9 @@ def blog(request):
             #'year':datetime.now().year,
         }
     )
-class HomePageView(TemplateView):
-    def get(self, request, **kwargs):
-        return render(request, 'blog/index.html', context=None)
+# class HomePageView(TemplateView):
+#     def get(self, request, **kwargs):
+#         return render(request, 'blog/index.html', context=None)
 
 def podcasts(request):
     return render(
@@ -26,3 +26,20 @@ def podcasts(request):
             #'year':datetime.now().year,
         }
     )
+def about(request):
+    return render(
+        request,
+        'blog/about.html',
+        {
+            'title':'About',
+        }
+    )
+
+def projects(request):
+    return render(
+        request,
+        'blog/projects.html',
+        {
+            'title':'Projects',
+        }
+    )    

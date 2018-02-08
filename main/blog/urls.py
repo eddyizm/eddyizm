@@ -7,5 +7,7 @@ urlpatterns = [
     #url(r'^$', views.HomePageView.as_view()),
     url(r'^blog/', views.blog , name='blog'),
     url(r'^podcasts/', views.podcasts, name='podcasts'),
+    url(r'^projects/', views.projects, name='projects'),
+    url(r'^about/', views.about, name='about'),
 ]
 
