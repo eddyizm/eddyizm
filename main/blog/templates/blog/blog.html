@@ -10,18 +10,16 @@
               <div class="9u 12u(mobile)">
 
                 <!-- Main Content -->
-                  <section>
-                    <header>
-                      <h2>Two Column #1</h2>
-                      <h3>A generic two column layout</h3>
+                {% for blog_post in posts %}  
+                <section>
+                  <header>
+                      <h2>{{ blog_post.title }}</h2>
+                      <h3> <span>Author:</span> {{ blog_post.author.name }}</h3>
+                      <h3> <span> {{ blog_post.date }} </span></h3>
                     </header>
-                    <ul>
-                      {% for blog_post in posts %}
-                          <li> {{ blog_post.title }} <br/>
+                    
                           <p> {{ blog_post.body }} </p>
-                      {% endfor %}
-                  </ul>
-                    <!-- <p>
+                  <!-- <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam metus, congue
                       vel suscipit ut, dignissim non risus. Vestibulum ante est, fringilla nec placerat
                       eu, vestibulum vitae diam. Integer eget egestas eros. Duis enim erat, mollis quis
@@ -30,7 +28,7 @@
                       varius ac, lacinia sit amet augue. Nam ultrices elementum eros.
                     </p> -->
                     </section>
-
+                 {% endfor %} 
               </div>
               <div class="3u 12u(mobile)">
 
