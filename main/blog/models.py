@@ -15,7 +15,7 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-class Blog(models.Model):
+class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateTimeField()
     body = models.CharField(max_length=20000)

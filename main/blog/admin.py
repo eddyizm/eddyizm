@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django import forms
 
-from blog.models import Blog, Tag
+from blog.models import BlogPost, Tag
 
-admin.site.register(Blog)
+admin.site.register(BlogPost)
 admin.site.register(Tag)

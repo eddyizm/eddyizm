@@ -8,8 +8,6 @@ def blog(request):
         'blog/blog.html',
         {
             'title':'Blog',
-            #'message':'Your application description page.',
-            #'year':datetime.now().year,
         }
     )
 # class HomePageView(TemplateView):
