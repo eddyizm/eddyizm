@@ -18,49 +18,39 @@
                       <h3> <span> {{ blog_post.date }} </span></h3>
                     </header>
                     
-                          <p> {{ blog_post.body }} </p>
-                  <!-- <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam metus, congue
-                      vel suscipit ut, dignissim non risus. Vestibulum ante est, fringilla nec placerat
-                      eu, vestibulum vitae diam. Integer eget egestas eros. Duis enim erat, mollis quis
-                      lacinia eget, blandit nec ipsum. Donec vitae turpis ipsum. Aliquam mauris libero,
-                      sagittis in eleifend at, mattis imperdiet velit. Donec urna risus, rutrum molestie
-                      varius ac, lacinia sit amet augue. Nam ultrices elementum eros.
-                    </p> -->
-                    </section>
-                 {% endfor %} 
+                          <p> {{ blog_post.body|slice:":50" }} . . . </p>
+                </section>
+                {% endfor %} 
               </div>
               <div class="3u 12u(mobile)">
 
                 <!-- Sidebar -->
-                  <section>
+                <section>
+                  <header>
+                    <h2>Ipsum Dolor</h2>
+                  </header>
+                  <p>
+                    Vehicula fermentum ligula at pretium. Suspendisse semper iaculis eros, eu aliquam
+                    iaculis. Phasellus ultrices diam sit amet orci lacinia sed consequat.
+                  </p>
+                  <ul class="link-list">
+                    <li><a href="#">Sed dolore viverra</a></li>
+                    <li><a href="#">Ligula non varius</a></li>
+                    <li><a href="#">Dis parturient montes</a></li>
+                    <li><a href="#">Nascetur ridiculus</a></li>
+                  </ul>
+                </section>
+                <section>
                     <header>
-                      <h2>Magna Phasellus</h2>
+                      <h2>Recent Posts</h2>
                     </header>
                     <ul class="link-list">
-                      <li><a href="#">Sed dolore viverra</a></li>
-                      <li><a href="#">Ligula non varius</a></li>
-                      <li><a href="#">Nec sociis natoque</a></li>
-                      <li><a href="#">Penatibus et magnis</a></li>
-                      <li><a href="#">Dis parturient montes</a></li>
-                      <li><a href="#">Nascetur ridiculus</a></li>
-                    </ul>
-                  </section>
-                  <section>
-                    <header>
-                      <h2>Ipsum Dolor</h2>
-                    </header>
-                    <p>
-                      Vehicula fermentum ligula at pretium. Suspendisse semper iaculis eros, eu aliquam
-                      iaculis. Phasellus ultrices diam sit amet orci lacinia sed consequat.
-                    </p>
-                    <ul class="link-list">
-                      <li><a href="#">Sed dolore viverra</a></li>
-                      <li><a href="#">Ligula non varius</a></li>
-                      <li><a href="#">Dis parturient montes</a></li>
-                      <li><a href="#">Nascetur ridiculus</a></li>
-                    </ul>
-                  </section>
+                      {% for blog_post in posts %}  
+                      <li><a href="#"> {{ blog_post.title }} </a></li>   
+                      <!-- <li><b> </b>: {{blogpost.content|truncatewords:10}}</li> -->
+                      {% endfor %}
+                      </ul>
+                 </section>
 
               </div>
             </div>
