@@ -15,7 +15,7 @@ def blog(request):
     
 def blog_posts(request):
     posts = BlogPost.objects.all();
-    return render_to_response('blog.bloghtml', {'posts' : posts})
+    return render_to_response('blog/blog.html', {'posts' : posts})
 
 
 def podcasts(request):
