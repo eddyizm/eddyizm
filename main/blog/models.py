@@ -24,5 +24,5 @@ class BlogPost(models.Model):
 
     def __str__(self):
          return self.title
-         # return "%s (%s)" % (self.title, self.author.name)
+         
 
