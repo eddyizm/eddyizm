@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Create your models here.
 class Author(models.Model):
@@ -21,8 +22,7 @@ class BlogPost(models.Model):
     body = models.CharField(max_length=20000)
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     tags = models.ManyToManyField(Tag)
-
+    
     def __str__(self):
          return self.title
-         
 
