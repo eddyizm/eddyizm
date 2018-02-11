@@ -22,7 +22,7 @@ class BlogPost(models.Model):
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     tags = models.ManyToManyField(Tag)
 
-    def __str__(self):
-        return self.title
-        #return "%s (%s)" % (self.title, self.author.name)
+    # def __str__(self):
+    #      return self.title
+           #return "%s (%s)" % (self.title, self.author.name)
 

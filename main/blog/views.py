@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.views.generic import TemplateView
+from blog.models import *
 
 # Create your views here.
 def blog(request):
@@ -10,9 +11,12 @@ def blog(request):
             'title':'Blog',
         }
     )
-# class HomePageView(TemplateView):
-#     def get(self, request, **kwargs):
-#         return render(request, 'blog/index.html', context=None)
+    
+    
+def blog_posts(request):
+    posts = BlogPost.objects.all();
+    return render_to_response('blog.bloghtml', {'posts' : posts})
+
 
 def podcasts(request):
     return render(
@@ -21,7 +25,6 @@ def podcasts(request):
         {
             'title':'Podcasts',
             #'message':'Your application description page.',
-            #'year':datetime.now().year,
         }
     )
 def about(request):
