@@ -1574,12 +1574,14 @@
 			#features-wrapper {
 				background: #353D40 url("images/bg02.jpg");
 				padding: 15px 15px 30px 15px;
+				padding-top: 75px;
 				text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.75);
 			}
 
 			#content-wrapper {
 				background: #f7f7f7 url("images/bg04.png");
-				padding: 5px;
+				padding: 5px; 
+				padding-top: 75px;
 			}
 
 			.subpage #content-wrapper {
