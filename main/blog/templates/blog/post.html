@@ -14,7 +14,7 @@
                       <h3> <span>Author:</span> {{ post.author.name }}</h3>
                       <h3> <span> {{ post.date }} </span></h3>
                   </header>
-                    <p> {{ post.body }} </p>
+                    <p> {{ post.body| safe }} </p>
                 </section>
                </div>
               <div class="3u 12u(mobile)">
@@ -41,8 +41,7 @@
                     </header>
                     <ul class="link-list">
                       {% for blog_post in posts %}  
-                      <li><a href="#"> {{ blog_post.title }} </a></li>   
-                      <!-- <li><b> </b>: {{blogpost.content|truncatewords:10}}</li> -->
+                      <li><a href="/blog/{{ blog_post.id }}/"> {{ blog_post.title }} </a></li>   
                       {% endfor %}
                       </ul>
                  </section>

@@ -1,8 +1,6 @@
 {% extends "blog/layout.html" %}
 
 {% block content %}
-<!-- Content -->
-
       <div id="content-wrapper">
         <div id="content">
           <div class="container">
@@ -13,14 +11,11 @@
                 {% for blog_post in posts %}  
                 <section>
                   <header>
-                      <!-- <a href="/artists/{{ artist.id }}">
-                        {{ artist.name }} -->
                       <h2><a href="/blog/{{ blog_post.id }}/">{{ blog_post.title }} </a></h2>
                       <h3> <span>Author:</span> {{ blog_post.author.name }}</h3>
                       <h3> <span> {{ blog_post.date }} </span></h3>
-                    </header>
-                    
-                          <p> {{ blog_post.body|slice:":50" }} . . . </p>
+                  </header>
+                      <p> {{ blog_post.body|slice:":50" }} . . . </p>
                 </section>
                 {% endfor %} 
               </div>
@@ -49,7 +44,6 @@
                     <ul class="link-list">
                       {% for blog_post in posts %}  
                       <li><a href="/blog/{{ blog_post.id }}/"> {{ blog_post.title }} </a></li>   
-                      <!-- <li><b> </b>: {{blogpost.content|truncatewords:10}}</li> -->
                       {% endfor %}
                       </ul>
                  </section>
@@ -60,4 +54,6 @@
         </div>
       </div>
     </div>
-      {% endblock %}	
+{% endblock %}	
+
+
