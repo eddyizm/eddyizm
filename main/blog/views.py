@@ -18,7 +18,7 @@ def blog(request):
     )
 
 def blog_posts(request):
-    posts = BlogPost.objects.all();
+    posts = BlogPost.objects.all().order_by('-date');
     return render_to_response('blog/blog.html', {'posts' : posts})
 
 

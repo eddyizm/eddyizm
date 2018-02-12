@@ -23,6 +23,9 @@ class BlogPost(models.Model):
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     tags = models.ManyToManyField(Tag)
     
+    class Meta:
+        ordering = ['-date',]
+
     def __str__(self):
          return self.title
 
