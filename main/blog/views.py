@@ -3,6 +3,10 @@ from django.views.generic import TemplateView
 from blog.models import *
 
 # Create your views here.
+def post_detail(request, id):
+    post = BlogPost.objects.get(pk = id);
+    return render_to_response('blog/post.html', {'post' : post})
+
 def blog(request):
     return render(
         request,
@@ -11,8 +15,7 @@ def blog(request):
             'title':'Blog',
         }
     )
-    
-    
+
 def blog_posts(request):
     posts = BlogPost.objects.all();
     return render_to_response('blog/blog.html', {'posts' : posts})

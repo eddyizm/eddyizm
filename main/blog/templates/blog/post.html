@@ -2,28 +2,21 @@
 
 {% block content %}
 <!-- Content -->
-
       <div id="content-wrapper">
         <div id="content">
           <div class="container">
             <div class="row">
               <div class="9u 12u(mobile)">
-
-                <!-- Main Content -->
-                {% for blog_post in posts %}  
+              <!-- Main Content -->
                 <section>
                   <header>
-                      <!-- <a href="/artists/{{ artist.id }}">
-                        {{ artist.name }} -->
-                      <h2><a href="/blog/{{ blog_post.id }}/">{{ blog_post.title }} </a></h2>
-                      <h3> <span>Author:</span> {{ blog_post.author.name }}</h3>
-                      <h3> <span> {{ blog_post.date }} </span></h3>
-                    </header>
-                    
-                          <p> {{ blog_post.body|slice:":50" }} . . . </p>
+                      <h2>{{ post.title }}</h2>
+                      <h3> <span>Author:</span> {{ post.author.name }}</h3>
+                      <h3> <span> {{ post.date }} </span></h3>
+                  </header>
+                    <p> {{ post.body }} </p>
                 </section>
-                {% endfor %} 
-              </div>
+               </div>
               <div class="3u 12u(mobile)">
 
                 <!-- Sidebar -->
@@ -48,7 +41,7 @@
                     </header>
                     <ul class="link-list">
                       {% for blog_post in posts %}  
-                      <li><a href="/blog/{{ blog_post.id }}/"> {{ blog_post.title }} </a></li>   
+                      <li><a href="#"> {{ blog_post.title }} </a></li>   
                       <!-- <li><b> </b>: {{blogpost.content|truncatewords:10}}</li> -->
                       {% endfor %}
                       </ul>
