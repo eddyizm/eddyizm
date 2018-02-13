@@ -5,7 +5,7 @@ from blog.models import *
 # Create your views here.
 def post_detail(request, id):
     post = BlogPost.objects.get(pk = id);
-    posts = BlogPost.objects.all();
+    posts = BlogPost.objects.all()[:5];
     return render_to_response('blog/post.html', {'post' : post, 'posts' : posts})
 
 def blog(request):
@@ -18,8 +18,9 @@ def blog(request):
     )
 
 def blog_posts(request):
-    posts = BlogPost.objects.all().order_by('-date');
-    return render_to_response('blog/blog.html', {'posts' : posts})
+    posts = BlogPost.objects.all().order_by('-date')[:3];
+    recent_posts = BlogPost.objects.all()[:5];
+    return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts })
 
 
 def podcasts(request):
