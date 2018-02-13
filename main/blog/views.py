@@ -28,7 +28,6 @@ def podcasts(request):
         'blog/podcasts.html',
         {
             'title':'Podcasts',
-            #'message':'Your application description page.',
         }
     )
 def about(request):
