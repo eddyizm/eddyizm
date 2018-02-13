@@ -12,8 +12,8 @@
                 <section>
                   <header>
                       <h2><a href="/blog/{{ blog_post.id }}/">{{ blog_post.title }} </a></h2>
-                      <h3> <span>Author:</span> {{ blog_post.author.name }}</h3>
-                      <h3> <span> {{ blog_post.date }} </span></h3>
+                      <h3> <span>by </span> {{ blog_post.author.name }}</h3>
+                      <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
                   </header>
                       <p> {{ blog_post.body|slice:":50" }} . . . </p>
                 </section>
