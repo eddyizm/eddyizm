@@ -15,6 +15,9 @@
                       <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
                   </header>
                     <p> {{ post.body| safe }} </p>
+                    <div>
+                      {% include 'blog/disqus.html' %} 
+                    </div>
                 </section>
                </div>
               <div class="3u 12u(mobile)">
@@ -47,7 +50,7 @@
                               <div id="mce-success-response" class="response" style="display: none;"></div>
                               </div>
                               <p><!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups --></p>
-                              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input tabindex="-1" name="b_d53e408a6ccb1e1ce4059fb9c_9d4ffc78c0" type="text" value="" /></div>
+                              <div style="position: absolute; left: -5000px;" arials-hidden="true"><input tabindex="-1" name="b_d53e408a6ccb1e1ce4059fb9c_9d4ffc78c0" type="text" value="" /></div>
                               <div class="clear"><input id="mc-embedded-subscribe" class="button" name="subscribe" type="submit" value="Subscribe" /></div>
                               </div>
                               </form>
@@ -68,7 +71,7 @@
                       {% endfor %}
                       </ul>
                  </section>
-
+           
               </div>
             </div>
           </div>
