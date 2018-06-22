@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^podcasts/', views.podcasts, name='podcasts'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^about/', views.about, name='about'),
+    url(r'^quotes/random/', views.random_q, name='random'),
 ]
 

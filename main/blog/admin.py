@@ -1,13 +1,12 @@
 from django.contrib import admin
 from django import forms
-from blog.models import BlogPost, Author, Tag
+from blog.models import BlogPost, Author, Category
 from django.forms import TextInput, Textarea
 from django.db import models
 
 # Register your models here.
 admin.site.register(Author)
-admin.site.register(Tag)
-
+admin.site.register(Category)
 # Added to get text area in admin area for blog post.         
 class YourModelAdmin(admin.ModelAdmin):
         formfield_overrides = {
@@ -15,5 +14,4 @@ class YourModelAdmin(admin.ModelAdmin):
         #models.TextField: {'widget': Textarea(attrs={'rows':5, 'cols':40})},
     }
 
-admin.site.register(BlogPost, YourModelAdmin)
-
+admin.site.register(BlogPost, YourModelAdmin)    

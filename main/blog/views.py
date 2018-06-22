@@ -1,6 +1,9 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.views.generic import TemplateView
+from django.http import HttpResponse, JsonResponse
+import json
 from blog.models import *
+from blog.quotes import get_random_q
 
 # Create your views here.
 def post_detail(request, id):
@@ -48,3 +51,10 @@ def projects(request):
             'title':'Projects',
         }
     )    
+
+# json views for quotes app
+def random_q(request):
+    data = get_random_q()
+    #data = {'foo': 'bar', 'hello': 'world'}
+    return JsonResponse(data, safe=False)
+    #return HttpResponse(json.dumps(data), content_type='application/json')     
