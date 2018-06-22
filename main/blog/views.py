@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, JsonResponse
 import json
 from blog.models import *
-from blog.quotes import get_random_q
+from blog.quotes import get_random_q, get_daily_q
 
 # Create your views here.
 def post_detail(request, id):
@@ -58,3 +58,7 @@ def random_q(request):
     #data = {'foo': 'bar', 'hello': 'world'}
     return JsonResponse(data, safe=False)
     #return HttpResponse(json.dumps(data), content_type='application/json')     
+
+def daily_q(request):
+    data = get_daily_q()
+    return JsonResponse(data, safe=False)
