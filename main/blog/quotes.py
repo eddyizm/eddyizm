@@ -10,8 +10,7 @@ def get_random_q():
   conn = sqlite3.connect(sqlite_file)
   conn.row_factory = sqlite3.Row 
   c = conn.cursor()
-  rows = c.execute('''select quotes.quote AS quote,quotes.ID AS ID from quotes
-              WHERE quotes.ID = (SELECT ABS(RANDOM()) % (5245 - 1) + 1)''').fetchall()
+  rows = c.execute('''select quote, ID from randomQview''').fetchall()
   conn.close()
   return json.dumps( [dict(ix) for ix in rows] )   
 #return json.dumps(dict(c.fetchall()))
