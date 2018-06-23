@@ -76,4 +76,5 @@ def do_the_work():
   pass
 
 #print(get_daily_q())
-get_email_queue()
+if __name__ == '__main__':
+  get_email_queue()
