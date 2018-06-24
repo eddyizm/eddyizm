@@ -1,11 +1,15 @@
 import sqlite3
 import json
 import requests
+import os
 from datetime import datetime as d
 # import os.path
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # db_path = os.path.join(BASE_DIR, "PupilPremiumTable.db")
-
+if os.name == 'nt':
+    logintext = "C:\\Users\\cervantes\\Downloads\\login.txt"
+else:
+    logintext = "/Users/eduardocervantes/Desktop/Macbook/login.txt"
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
 insertQuoteH = 'INSERT INTO QuoteHistory VALUES (?, ?)'
@@ -44,14 +48,14 @@ def get_daily_q():
   conn.close()
   return json.dumps( [dict(ix) for ix in rows] )     
 
-def send_quote(email, quote, fname ):
+def send_quote(email, quote, fname, api_key ):
   # send via mailgun
   return requests.post(
         "https://api.mailgun.net/v3/mailgun.eddyizm.com/messages",
-        auth=("api", "API KEY"),
-        data={"from": "Postmaster <postmaster@mg.eddyizm.com>",
-              "to": [email],
-              "subject": "Hello "+ fname,
+        auth=("api", api_key),
+        data={"from": "quotes <postmaster@mg.eddyizm.com>",
+              "to": email,
+              "subject": "Hello {}".format(fname),
               "text": "Testing some Mailgun awesomness!"})
 
 def get_email_queue():
@@ -61,17 +65,19 @@ def get_email_queue():
   rows = c.execute(emailsQueue).fetchall()
   conn.close()
   if len(rows) > 0:
-    for r in rows:
-      print (r[0]) #
-      print (r[1])
-      print (r[2])
-      print (r[3])
-      print (r[4])
+    return rows
+
 
 def update_hist(date, emailID, quoteID):
-  # update Ehistory table with record sent
-  pass              
+  conn = sqlite3.connect(sqlite_file)
+  c = conn.cursor()
+  c.execute(updateHistoryQ, (date, emailID, quoteID))
+  conn.close()         
 
+def get_api():
+  with open(logintext, 'r') as g:
+     login = g.read().splitlines()
+     return login[0]
 # process 5 emails at a time
 def do_the_work():
   pass
@@ -80,7 +86,6 @@ def do_the_work():
 #print(get_daily_q())
 if __name__ == '__main__':
   print('in the main function!')  
-  # “{} {} is {} years old.“ format(fname, lname, age)
   message = '''<html>
 		<head>
 		<title>Quotes.eddyizm.com</title>
@@ -99,5 +104,8 @@ if __name__ == '__main__':
 		</table>
 		</body>
 		</html>'''.format('this is a quote - bob', 'test')
-  print (message)
-  #get_email_queue()
+  #print (message)
+  emails = get_email_queue()
+  print (get_api())
+  for e in emails:
+    print (e[1])
