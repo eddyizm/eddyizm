@@ -1,5 +1,6 @@
 import sqlite3
 import json
+import requests
 from datetime import datetime as d
 # import os.path
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -48,7 +49,7 @@ def send_quote(email, quote, fname ):
   return requests.post(
         "https://api.mailgun.net/v3/mailgun.eddyizm.com/messages",
         auth=("api", "API KEY"),
-        data={"from": "Postmaster <postmaster@mailgun.eddyizm.com>",
+        data={"from": "Postmaster <postmaster@mg.eddyizm.com>",
               "to": [email],
               "subject": "Hello "+ fname,
               "text": "Testing some Mailgun awesomness!"})
@@ -75,6 +76,28 @@ def update_hist(date, emailID, quoteID):
 def do_the_work():
   pass
 
+
 #print(get_daily_q())
 if __name__ == '__main__':
-  get_email_queue()
+  print('in the main function!')  
+  # “{} {} is {} years old.“ format(fname, lname, age)
+  message = '''<html>
+		<head>
+		<title>Quotes.eddyizm.com</title>
+		</head>
+		<body>
+		<p> {} </p>
+		<table>
+		<tr>
+		<th></th>
+		<th></th>
+		</tr>
+		<tr>
+		<td><a href=\"http://quotes.eddyizm.com\">quotes</a> | <a href=\"https://play.google.com/store/apps/details?id=com.eddyizm.quotes\">new android app</a> |</td>
+		<td><a href=http://quotes.eddyizm.com/unsubscribe.php?subscriptionId={}>unsubscribe</a></td>
+		</tr>
+		</table>
+		</body>
+		</html>'''.format('this is a quote - bob', 'test')
+  print (message)
+  #get_email_queue()
