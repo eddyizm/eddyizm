@@ -60,5 +60,5 @@ def random_q(request):
     #return HttpResponse(json.dumps(data), content_type='application/json')     
 
 def daily_q(request):
-    data = get_daily_q()
+    data = get_daily_q(True)
     return JsonResponse(data, safe=False)
