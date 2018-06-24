@@ -53,13 +53,13 @@ def get_daily_q(rtn_json):
     return rows
 
 def send_quote(email, quote, fname, api_key ):
-  # send via mailgun
   return requests.post(
-        "https://api.mailgun.net/v3/mailgun.eddyizm.com/messages",
+        "https://api.mailgun.net/v3/mg.eddyizm.com/messages",
         auth=("api", api_key),
-        data={"from": "quotes <postmaster@mg.eddyizm.com>",
+        data={"from": "Postmaster <postmaster@mg.eddyizm.com>",
               "to": email,
               "subject": "Hello {}".format(fname),
+              "text": quote,
               "html": '''<html>
                         <head>
                         <title>eddyizm.com/quotes</title>
@@ -78,7 +78,7 @@ def send_quote(email, quote, fname, api_key ):
                         </table>
                         </body>
                         </html>'''.format(quote, 'test')})
-
+# process 5 emails at a time
 def get_email_queue():
   conn = sqlite3.connect(sqlite_file)
   conn.row_factory = sqlite3.Row
@@ -92,30 +92,38 @@ def update_hist(date, emailID, quoteID):
   conn = sqlite3.connect(sqlite_file)
   c = conn.cursor()
   c.execute(updateHistoryQ, (date, emailID, quoteID))
+  conn.commit()
   conn.close()
 
 def get_api():
   with open(logintext, 'r') as g:
      login = g.read().splitlines()
      return login[0]
-# process 5 emails at a time
-def do_the_work():
-  pass
 
+def do_the_work():
+  try:
+    emails = get_email_queue()
+    _api_key = get_api()
+    currDate = d.now().strftime("%Y-%m-%d")
+    for e in emails:
+      send_quote(e[1], e[4], e[0], _api_key)
+      update_hist(currDate, e[2], e[3])
+      print ('email sent {}'.format(e[1]))
+      #if e[1] == 'eddyizm@icloud.com':
+
+  except:
+    pass
 
 #print(get_daily_q())
 if __name__ == '__main__':
-  if (d.utcnow().hour - 7) == 8:
+  hour_check = (d.utcnow().hour - 7)
+  if hour_check == 6:
     #insert_daily_q()
     print ('insert history block')
     
-  if (d.utcnow().hour - 7) == 10:
-    emails = get_email_queue()
-    for e in emails:
-       print (e[0]) #name
-       print (e[1]) #address
-       print (e[2]) # email id 
-       print (e[3]) # quote id
-       print (e[4]) # quote
+  if hour_check == 10 or hour_check == 12 or hour_check == 7 or hour_check == 15 or hour_check == 17:
+    print ('in the work loop')
+    do_the_work()
+
   #print (get_api())
   
