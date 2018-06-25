@@ -114,8 +114,7 @@ def do_the_work():
       send_quote(e[1], e[4], e[0], _api_key)
       update_hist(currDate, e[2], e[3])
       print ('email sent {}'.format(e[1]))
-      #if e[1] == 'eddyizm@icloud.com':
-
+      
   except:
     pass
 
@@ -123,7 +122,7 @@ def do_the_work():
 if __name__ == '__main__':
   hour_check = (d.utcnow().hour - 7)
   if hour_check == 6:
-    #insert_daily_q()
+    insert_daily_q()
     print ('insert history block')
     
   if hour_check == 10 or hour_check == 12 or hour_check == 7 or hour_check == 15 or hour_check == 17:
