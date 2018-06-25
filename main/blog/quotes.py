@@ -14,7 +14,11 @@ else:
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
 insertQuoteH = 'INSERT INTO QuoteHistory VALUES (?, ?)'
-sqlite_file = 'main/quotes_app.sqlite3'
+if os.name == 'nt':
+  sqlite_file = 'main/quotes_app.sqlite3'
+else:
+  sqlite_file = "/home/eddyizm/sitefiles/eddyizm/main/quotes_app.sqlite3"
+
 insert_ehistory = '''INSERT INTO EHistory (dateSent, quoteID_FK, email_ID_FK)  SELECT  '1900-01-01' AS dateSent, q.quoteID_FK, e.ID
 FROM  QuoteHistory q CROSS JOIN emailAddress e WHERE  (e.active = 1)  AND q.dateSent = date('now')
 AND q.quoteID_FK NOT IN (SELECT  quoteID_FK from EHistory WHERE dateSent='1900-01-01' OR dateSent > date('now', '-31 day'));'''
