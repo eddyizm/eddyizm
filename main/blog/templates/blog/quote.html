@@ -1,0 +1,20 @@
+{% extends "blog/layout.html" %}
+{% load staticfiles %}
+{% block content %}
+<!-- Features -->
+<div id="features-wrapper">
+        <div id="features">
+          <div class="container">
+            <div class="row">
+                    {% for quotes in q %}
+              <div class="12u 12u(mobile)">
+                <h2> {{ quotes.quote }}</h2>
+                <!-- <a href="#" class="button-big">Go on, click me!</a> -->
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}

@@ -62,3 +62,19 @@ def random_q(request):
 def daily_q(request):
     data = get_daily_q(True)
     return JsonResponse(data, safe=False)
+
+# index for quotes
+
+# def blog_posts(request):
+#     posts = BlogPost.objects.all().order_by('-date')[:3];
+#     recent_posts = BlogPost.objects.all()[:5];
+#     return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts })
+
+def quote_v(request):
+    q = get_daily_q(False)
+    return render_to_response(
+        'blog/quote.html',
+        {
+            'title':'Daily Quotes', 'q' : q
+        }
+    )  
