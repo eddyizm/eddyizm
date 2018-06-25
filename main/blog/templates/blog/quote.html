@@ -1,19 +1,28 @@
 {% extends "blog/layout.html" %}
-{% load staticfiles %}
+
 {% block content %}
-<!-- Features -->
+{% load staticfiles %}
+
 <div id="features-wrapper">
         <div id="features">
+          
           <div class="container">
+                {% for quotes in q %}
             <div class="row">
-                    {% for quotes in q %}
+                   
               <div class="12u 12u(mobile)">
-                <h2> {{ quotes.quote }}</h2>
-                <!-- <a href="#" class="button-big">Go on, click me!</a> -->
+                <!-- <a href="#" class="button-big">{{ quotes.quote }}</a> -->
+                <!-- <h3> click for a random quote </h3> -->
+                <h1>{{ quotes.quote }} </h1>
               </div>
-              {% endfor %}
+             
+            </div>
+            {% endfor %}
+            <div class="row">
+        <!-- <a href="#" class="button-big">sign up</a> -->
             </div>
           </div>
+        
         </div>
       </div>
 

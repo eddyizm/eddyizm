@@ -1374,6 +1374,12 @@
 					margin: 0 0 0.25em 0;
 				}
 
+				#features h1 {
+					font-size: 2.25em;
+					color: #fff;
+					margin: 0 0 0.25em 0;
+				}
+
 				#features a {
 					color: #e0e8eb;
 				}
