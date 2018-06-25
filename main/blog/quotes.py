@@ -9,7 +9,8 @@ from datetime import datetime as d
 if os.name == 'nt':
     logintext = "C:\\Users\\cervantes\\Downloads\\login.txt"
 else:
-    logintext = "/Users/eduardocervantes/Desktop/Macbook/login.txt"
+    logintext = "/home/eddyizm/sitefiles/login.txt"
+    
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
 insertQuoteH = 'INSERT INTO QuoteHistory VALUES (?, ?)'
