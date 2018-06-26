@@ -20,7 +20,7 @@ else:
   sqlite_file = "/home/eddyizm/sitefiles/eddyizm/main/quotes_app.sqlite3"
 
 insert_ehistory = '''INSERT INTO EHistory (dateSent, quoteID_FK, email_ID_FK)  SELECT  '1900-01-01' AS dateSent, q.quoteID_FK, e.ID
-FROM  QuoteHistory q CROSS JOIN emailAddress e WHERE  (e.active = 1)  AND q.dateSent = date('now')
+FROM  QuoteHistory q CROSS JOIN emailAddress e WHERE  (e.active = 1)  AND q.dateSent =  '2018-06-25'
 AND q.quoteID_FK NOT IN (SELECT  quoteID_FK from EHistory WHERE dateSent='1900-01-01' OR dateSent > date('now', '-31 day'));'''
 emailsQueue = '''SELECT firstName, emailAddress, emailID, quoteID_FK, quote FROM emailToSend ORDER BY RANDOM() LIMIT 5'''
 updateHistoryQ = "UPDATE EHistory SET dateSent = ? WHERE email_ID_FK = ? and quoteID_FK =? "
@@ -42,6 +42,8 @@ def insert_daily_q():
   for i in rows:
      c.execute(insertQuoteH, (currDate, i[1]))
      conn.commit()
+  c.execute(insert_ehistory)
+  conn.commit()   
   conn.close()
 
 def get_daily_q(rtn_json):
@@ -53,8 +55,6 @@ def get_daily_q(rtn_json):
   if rtn_json:
     return json.dumps( [dict(ix) for ix in rows] )
   else:
-    # for r in d:
-    #   (r[0])
     return rows
 
 def send_quote(email, quote, fname, api_key ):
@@ -129,5 +129,11 @@ if __name__ == '__main__':
     print ('in the work loop')
     do_the_work()
 
-  #print (get_api())
+  if hour_check == 4:
+    conn = sqlite3.connect(sqlite_file)
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    c.execute(insert_ehistory)
+    conn.commit()
+
   
