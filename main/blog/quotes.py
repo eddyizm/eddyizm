@@ -120,12 +120,12 @@ def do_the_work():
 
 #print(get_daily_q())
 if __name__ == '__main__':
-  hour_check = (d.utcnow().hour - 7)
-  if hour_check == 6:
+  hour_check = d.utcnow().hour
+  if hour_check == 9:
     insert_daily_q()
     print ('insert history block')
     
-  if hour_check == 10 or hour_check == 12 or hour_check == 7 or hour_check == 15 or hour_check == 17:
+  if hour_check == 12 or hour_check == 14 or hour_check == 18 or hour_check == 20 or hour_check == 23:
     print ('in the work loop')
     do_the_work()
 
