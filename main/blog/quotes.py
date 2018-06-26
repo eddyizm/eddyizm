@@ -20,7 +20,7 @@ else:
   sqlite_file = "/home/eddyizm/sitefiles/eddyizm/main/quotes_app.sqlite3"
 
 insert_ehistory = '''INSERT INTO EHistory (dateSent, quoteID_FK, email_ID_FK)  SELECT  '1900-01-01' AS dateSent, q.quoteID_FK, e.ID
-FROM  QuoteHistory q CROSS JOIN emailAddress e WHERE  (e.active = 1)  AND q.dateSent =  '2018-06-25'
+FROM  QuoteHistory q CROSS JOIN emailAddress e WHERE  (e.active = 1)  AND q.dateSent =  date('now')
 AND q.quoteID_FK NOT IN (SELECT  quoteID_FK from EHistory WHERE dateSent='1900-01-01' OR dateSent > date('now', '-31 day'));'''
 emailsQueue = '''SELECT firstName, emailAddress, emailID, quoteID_FK, quote FROM emailToSend ORDER BY RANDOM() LIMIT 5'''
 updateHistoryQ = "UPDATE EHistory SET dateSent = ? WHERE email_ID_FK = ? and quoteID_FK =? "
@@ -129,11 +129,6 @@ if __name__ == '__main__':
     print ('in the work loop')
     do_the_work()
 
-  if hour_check == 4:
-    conn = sqlite3.connect(sqlite_file)
-    conn.row_factory = sqlite3.Row
-    c = conn.cursor()
-    c.execute(insert_ehistory)
-    conn.commit()
+
 
   
