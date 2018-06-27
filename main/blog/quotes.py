@@ -118,14 +118,14 @@ def do_the_work():
   except:
     pass
 
-#print(get_daily_q())
+
 if __name__ == '__main__':
   hour_check = d.utcnow().hour
-  if hour_check == 2:
+  if hour_check == 12:
     insert_daily_q()
     print ('insert history block')
     
-  if hour_check == 5 or hour_check == 7 or hour_check == 10 or hour_check == 13 or hour_check == 16:
+  if hour_check == 14 or hour_check == 16 or hour_check == 18 or hour_check == 20 or hour_check == 22:
     print ('in the work loop')
     do_the_work()
 
