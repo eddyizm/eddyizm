@@ -55,13 +55,11 @@ def projects(request):
 # json views for quotes app
 def random_q(request):
     data = get_random_q()
-    #data = {'foo': 'bar', 'hello': 'world'}
-    return JsonResponse(data, safe=False)
-    #return HttpResponse(json.dumps(data), content_type='application/json')     
+    return HttpResponse(data, content_type='application/json')     
 
 def daily_q(request):
     data = get_daily_q(True)
-    return JsonResponse(data, safe=False)
+    return HttpResponse(data, content_type='application/json')     
 
 # index for quotes
 
