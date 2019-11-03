@@ -11,7 +11,7 @@
                 {% for blog_post in posts %}
                 <section>
                   <header>
-                      <h2><a href="/blog/{{ blog_post.id }}/">{{ blog_post.title }} </a></h2>
+                      <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }} </a></h2>
                       <h3> <span>by </span> {{ blog_post.author.name }}</h3>
                       <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
                   </header>
@@ -65,7 +65,7 @@
                     </header>
                     <ul class="link-list">
                       {% for blog_post in recent_posts %}
-                      <li><a href="/blog/{{ blog_post.id }}/"> {{ blog_post.title }} </a></li>
+                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
                       {% endfor %}
                       </ul>
                  </section>

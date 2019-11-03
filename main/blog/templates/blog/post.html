@@ -14,15 +14,15 @@
                       <h3> <span>by </span> {{ post.author.name }}</h3>
                       <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
                   </header>
-                    <p> {{ post.body| safe }} </p>
+                  <p> {{ post.body| safe }} </p>
                     
                     <div>
                       <div id="disqus_thread"></div>
                       <script>
                                                     
                           var disqus_config = function () {
-                              this.page.url = 'http://eddyizm.com/blog/{{ post.id }}/';  
-                              this.page.identifier ='/{{ post.id }}/' ; 
+                              this.page.url = 'http://eddyizm.com/blog/{{ post.id }}-{{ blog_post.slug }}/';  
+                              this.page.identifier ='/{{ post.id }}-{{ blog_post.slug }}/' ; 
                           };
                           
                           (function() {  // DON'T EDIT BELOW THIS LINE
@@ -85,7 +85,7 @@
                     </header>
                     <ul class="link-list">
                       {% for blog_post in posts %}  
-                      <li><a href="/blog/{{ blog_post.id }}/"> {{ blog_post.title }} </a></li>   
+                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>   
                       {% endfor %}
                       </ul>
                  </section>

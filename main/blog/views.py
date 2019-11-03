@@ -6,10 +6,11 @@ from blog.models import *
 from blog.quotes import get_random_q, get_daily_q
 
 # Create your views here.
-def post_detail(request, id):
-    post = BlogPost.objects.get(pk = id);
+def post_detail(request, id, slug):
+    query_pk_and_slug = True
+    post = BlogPost.objects.get(pk = id, slug=slug);
     posts = BlogPost.objects.all()[:5];
-    return render_to_response('blog/post.html', {'post' : post, 'posts' : posts})
+    return render_to_response('blog/post.html', {'post' : post, 'posts' : posts, 'slug':slug})
 
 def blog(request):
     return render(
@@ -62,12 +63,6 @@ def daily_q(request):
     return HttpResponse(data, content_type='application/json')     
 
 # index for quotes
-
-# def blog_posts(request):
-#     posts = BlogPost.objects.all().order_by('-date')[:3];
-#     recent_posts = BlogPost.objects.all()[:5];
-#     return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts })
-
 def quote_v(request):
     q = get_daily_q(False)
     return render_to_response(

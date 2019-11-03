@@ -1,5 +1,7 @@
 from django.db import models
 from django import forms
+from django.urls import reverse
+from django.utils.text import slugify
 
 # Create your models here.
 class Author(models.Model):
@@ -9,21 +11,32 @@ class Author(models.Model):
     def __str__(self):
         return "%s (%s)" % (self.name, self.email)
 
-# class Tag(models.Model):
-#     name = models.CharField(max_length=255)
-#     description = models.CharField(max_length=255, null=True, default='')
-
-#     def __str__(self):
-#         return self.name
-
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateTimeField()
     body = models.CharField(max_length=20000)
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
-    #tags = models.ManyToManyField(Tag)
+    slug = models.SlugField(
+        default='',
+        editable=False,
+        max_length=100
+    )
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.PROTECT)
     
+    def get_absolute_url(self):
+        kwargs = {
+            'pk': self.id,
+            'slug': self.slug
+        }
+        
+        return reverse('post_detail', kwargs={'slug': self.slug, 'id':self.id})
+
+    def save(self, *args, **kwargs):
+        value = self.title
+        self.slug = slugify(value, allow_unicode=True)        
+        super().save(*args, **kwargs)
+
+
     class Meta:
         ordering = ['-date',]
 

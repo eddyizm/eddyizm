@@ -1227,6 +1227,43 @@
 			box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.75), inset 0px 2px 0px 0px rgba(255, 192, 192, 0.5), inset 0px 0px 0px 2px rgba(255, 96, 96, 0.85), 3px 3px 3px 1px rgba(0, 0, 0, 0.15);
 		}
 
+		/* CUSTOM BUTTON, SMALLER */
+		.button-small {
+			background-image: -moz-linear-gradient(top, #0e7eaa, #0f6181);
+			background-image: -webkit-linear-gradient(top, #0e7eaa, #0f6181);
+			background-image: -ms-linear-gradient(top, #0e7eaa, #0f6181);
+			background-image: linear-gradient(top, #0e7eaa, #0f6181);
+			display: inline-block;
+			background-color: #0f6181;
+			color: #fff;
+			text-decoration: none;
+			font-size: 1.00em;
+			font-weight: 300;
+			padding: 10px 15px 10px 15px;
+			outline: 0;
+			border-radius: 10px;
+			/* box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.75), inset 0px 2px 0px 0px rgba(255, 192, 192, 0.5), inset 0px 0px 0px 2px rgba(255, 96, 96, 0.85), 3px 3px 3px 1px rgba(0, 0, 0, 0.15); */
+			text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5);
+		}
+	
+			.button-small:hover {
+				background-image: -moz-linear-gradient(top, #0f6181, #0e7eaa);
+				background-image: -webkit-linear-gradient(top, #0f6181, #0e7eaa);
+				background-image: -ms-linear-gradient(top, #0f6181, #0e7eaa);
+				background-image: linear-gradient(top, #0f6181, #0e7eaa);
+				background-color: #0e7eaa;
+				/* box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.75), inset 0px 2px 0px 0px rgba(255, 192, 192, 0.5), inset 0px 0px 0px 2px rgba(255, 96, 96, 0.85), 3px 3px 3px 1px rgba(0, 0, 0, 0.15); */
+			}
+	
+			.button-small:active {
+				background-image: -moz-linear-gradient(top, #31addf, #0f6181);
+				background-image: -webkit-linear-gradient(top, #31addf, #0f6181);
+				background-image: -ms-linear-gradient(top, #31addf, #0f6181);
+				background-image: linear-gradient(top, #31addf, #0f6181);
+				background-color: #31addf;
+				box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.75), inset 0px 2px 0px 0px rgba(255, 192, 192, 0.5), inset 0px 0px 0px 2px rgba(255, 96, 96, 0.85), 3px 3px 3px 1px rgba(0, 0, 0, 0.15);
+			}				
+
 /* Content */
 
 	#content .quote-list li {
