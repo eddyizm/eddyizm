@@ -2,15 +2,19 @@ from django.shortcuts import render, render_to_response, redirect
 from django.views.generic import TemplateView
 from django.http import HttpResponse, JsonResponse
 import json
+from datetime import datetime
 from blog.models import *
 from blog.quotes import get_random_q, get_daily_q
+
+# get current year for display in footer
+year_var = datetime.now().strftime('%Y')
 
 # Create your views here.
 def post_detail(request, id, slug):
     query_pk_and_slug = True
     post = BlogPost.objects.get(pk = id, slug=slug);
     posts = BlogPost.objects.all()[:5];
-    return render_to_response('blog/post.html', {'post' : post, 'posts' : posts, 'slug':slug})
+    return render_to_response('blog/post.html', {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var})
 
 def blog(request):
     return render(
@@ -18,13 +22,14 @@ def blog(request):
         'blog/blog.html',
         {
             'title':'Blog',
+            'year' : year_var
         }
     )
 
 def blog_posts(request):
     posts = BlogPost.objects.all().order_by('-date')[:3];
     recent_posts = BlogPost.objects.all()[:5];
-    return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts })
+    return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var })
 
 
 def podcasts(request):
@@ -33,6 +38,7 @@ def podcasts(request):
         'blog/podcasts.html',
         {
             'title':'Podcasts',
+            'year' : year_var
         }
     )
 def about(request):
@@ -41,6 +47,7 @@ def about(request):
         'blog/about.html',
         {
             'title':'About',
+            'year' : year_var
         }
     )
 
@@ -50,6 +57,7 @@ def projects(request):
         'blog/projects.html',
         {
             'title':'Projects',
+            'year' : year_var
         }
     )    
 
@@ -68,6 +76,6 @@ def quote_v(request):
     return render_to_response(
         'blog/quote.html',
         {
-            'title':'Daily Quotes', 'q' : q
+            'title':'Daily Quotes', 'q' : q ,'year': year_var
         }
     )  
