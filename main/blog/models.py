@@ -14,7 +14,7 @@ class Author(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateTimeField()
-    body = models.CharField(max_length=20000)
+    body = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     slug = models.SlugField(
         default='',
