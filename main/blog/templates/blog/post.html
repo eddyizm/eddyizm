@@ -60,7 +60,7 @@
                       <h2>Recent Posts</h2>
                     </header>
                     <ul class="link-list">
-                      {% for blog_post in recent_posts %}
+                      {% for blog_post in posts %}
                       <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
                       {% endfor %}
                       </ul>
