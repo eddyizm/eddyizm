@@ -127,7 +127,7 @@ if __name__ == '__main__':
     
   if hour_check == 14 or hour_check == 16 or hour_check == 18 or hour_check == 20 or hour_check == 22:
     print ('in the work loop')
-    do_the_work()
+    # do_the_work()
 
 
 
