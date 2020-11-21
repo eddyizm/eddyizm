@@ -71,4 +71,4 @@ class MusicTrack(models.Model):
     dataURL = models.URLField()
 
     def __str__(self):
-        return f'{self.id}.{self.title}-{self.artist}-{self.album}'
+        return "%s-%s-%s-%s" % (self.id, self.title, self.artist, self.album)
