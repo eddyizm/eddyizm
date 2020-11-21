@@ -63,7 +63,7 @@ def projects(request):
 
 # cfc music player
 def cfc(request):
-    tracks = range(1,9)
+    tracks = MusicTrack.objects.all()
     return render(
         request,
         'blog/cfc.html',
