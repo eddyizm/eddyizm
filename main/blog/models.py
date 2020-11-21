@@ -63,3 +63,9 @@ class Category(models.Model):
             k = k.parent
 
         return ' -> '.join(full_path[::-1])
+
+class MusicTrack(models.Model):
+    artist = models.CharField(max_length=64)
+    album = models.CharField(max_length=64)
+    title = models.CharField(max_length=64)
+    dataURL = models.URLField()

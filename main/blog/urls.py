@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^podcasts/', views.podcasts, name='podcasts'),
     url(r'^projects/', views.projects, name='projects'),
     url(r'^about/', views.about, name='about'),
+    url(r'^chosenfewchildren/', views.cfc, name='chosenfewchildren'),
     # quotes app routes
     url(r'^quotes/random/', views.random_q , name='random'),
     url(r'^quotes/daily/', views.daily_q , name='daily'),

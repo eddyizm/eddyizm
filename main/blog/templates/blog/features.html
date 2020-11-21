@@ -8,13 +8,13 @@
 
           <!-- Feature #1 -->
             <section>
-              <a href="https://www.etsy.com/shop/eddyizm" class="bordered-feature-image"><img src="{% static 'blog/images/ceramics1.jpg' %}" alt="" /></a>
-              <h2>Wheel Thrown Ceramics</h2>
+              <a href="{% url 'chosenfewchildren' %}" class="bordered-feature-image">
+                <img src="{% static 'blog/images/cfc.jpg' %}" alt="" /></a>
+              <h2>Chosen Few Children</h2>
               <p>
-                I started throwing again in 2016 after a 20 year hiatus.
-                Visit my <a href="https://www.etsy.com/shop/eddyizm">Etsy Shop</a> to see what I have available.
-                <!-- <strong>Halcyonic</strong>  -->
-               
+                Live, Whittier, CA 2003. 
+                Listen <a href="{% url 'chosenfewchildren' %}">here</a>.
+                               
                </p>
             </section>
 
@@ -26,7 +26,9 @@
               <a href="https://github.com/eddyizm/insta_delete" class="bordered-feature-image"><img src="{% static 'blog/images/insta_delete.png' %}" alt="insta_delete" /></a>
               <h2>Insta Delete / Insta Upload</h2>
               <p>Open source project using Selenium, BS4 and Python 3 to delete old instagram posts.                
-                
+                <br> 
+                <a href="https://eddyizm.com/blog/3-insta_delete/">Details on delete functionality.</a>
+                <br> 
                 <br> 
                 Recently added a new script to upload photos. Blog post to come.
               </p>
@@ -61,6 +63,23 @@
                 <br>
                 He has now surpassed me in ceramics skills but I got him beat on the google.
               </p>
+            </section>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="3u 12u(mobile)">
+
+          <!-- Feature #1 -->
+            <section>
+              <a href="https://www.etsy.com/shop/eddyizm" class="bordered-feature-image"><img src="{% static 'blog/images/ceramics1.jpg' %}" alt="" /></a>
+              <h2>Wheel Thrown Ceramics</h2>
+              <p>
+                I started throwing again in 2016 after a 20 year hiatus.
+                Visit my <a href="https://www.etsy.com/shop/eddyizm">Etsy Shop</a> to see what I have available.
+                <!-- <strong>Halcyonic</strong>  -->
+               
+               </p>
             </section>
 
         </div>

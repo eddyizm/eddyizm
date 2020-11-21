@@ -31,7 +31,6 @@ def blog_posts(request):
     recent_posts = BlogPost.objects.all()[:5];
     return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var })
 
-
 def podcasts(request):
     return render(
         request,
@@ -41,6 +40,7 @@ def podcasts(request):
             'year' : year_var
         }
     )
+
 def about(request):
     return render(
         request,
@@ -61,6 +61,18 @@ def projects(request):
         }
     )    
 
+# cfc music player
+def cfc(request):
+    tracks = range(1,9)
+    return render(
+        request,
+        'blog/cfc.html',
+        {
+            'title':'Chosen Few Children',
+            'year' : year_var,
+            'tracks': tracks
+        }
+    )   
 # json views for quotes app
 def random_q(request):
     data = get_random_q()
