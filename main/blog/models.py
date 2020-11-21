@@ -69,3 +69,6 @@ class MusicTrack(models.Model):
     album = models.CharField(max_length=64)
     title = models.CharField(max_length=64)
     dataURL = models.URLField()
+
+    def __str__(self):
+        return f'{self.id}.{self.title}-{self.artist}-{self.album}'
