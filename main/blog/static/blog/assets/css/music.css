@@ -23,6 +23,14 @@
     background:rgba(255,255,255,.2);
 }
 
+.music-details {
+	width:360px;
+	height:500px;
+	padding:15px;
+	position:relative;
+	margin:55px auto 0;
+}
+
 .mhn-player{
 	width:360px;
 	height:500px;

@@ -8,9 +8,9 @@ urlpatterns = [
     path('blog/<int:id>-<str:slug>/', views.post_detail, name='post_detail'),
     url(r'^blog/', views.blog_posts , name='blog_posts'),
     url(r'^podcasts/', views.podcasts, name='podcasts'),
-    url(r'^projects/', views.projects, name='projects'),
     url(r'^about/', views.about, name='about'),
-    url(r'^chosenfewchildren/', views.cfc, name='chosenfewchildren'),
+    url(r'^projects/chosenfewchildren/', views.cfc, name='chosenfewchildren'),
+    url(r'^projects/', views.projects, name='projects'),
     # quotes app routes
     url(r'^quotes/random/', views.random_q , name='random'),
     url(r'^quotes/daily/', views.daily_q , name='daily'),
