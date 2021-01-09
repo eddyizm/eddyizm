@@ -15,7 +15,14 @@
                       <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
                   </header>
                   <p> {{ post.body| safe }} </p>
-                    
+                    <div> 
+                      Categories:&nbsp;
+                      {% for category in post.categories.all %}
+                      <a href="#">
+                          {{ category.name }}
+                      </a>&nbsp;
+                      {% endfor %}
+                     </div>
                     <div>
                       <div id="disqus_thread"></div>
                       <script>
@@ -65,6 +72,16 @@
                       {% endfor %}
                       </ul>
                  </section>
+                 <section>
+                  <header>
+                    <h2>Categories</h2>
+                  </header>
+                  <ul class="link-list">
+                    {% for cat in categories %}
+                    <li><a href="#"> {{ cat.name }} </a></li>
+                    {% endfor %}
+                    </ul>
+               </section>
                  <section>
                   <p>
                     <a class="twitter-timeline"  data-tweet-limit="3" href="https://twitter.com/eddyizm?ref_src=twsrc%5Etfw">Tweets by eddyizm</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>              

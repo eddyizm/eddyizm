@@ -7,17 +7,18 @@
             <div class="row">
               <div class="9u 12u(mobile)">
 
-                <!-- Main Content -->
-                {% for blog_post in posts %}
-                <section>
-                  <header>
-                      <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }} </a></h2>
-                      <h3> <span>by </span> {{ blog_post.author.name }}</h3>
-                      <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
-                  </header>
-                      <p> {{ blog_post.body|slice:":400" }} . . . </p>
-                </section>
-                {% endfor %}
+          <!-- Main Content -->
+          <h1>{{ category | title }}</h1>
+          {% for blog_posts in posts %}
+          <section>
+            <header>
+                <h2><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a></h2>
+                <h3> <span>by </span> {{ blog_posts.author.name }}</h3>
+                <h4> <span>on {{ blog_posts.date|date:"F jS o" }} </span></h4>
+            </header>
+                <p> {{ blog_posts.body|slice:":400" }} . . . </p>
+          </section>
+          {% endfor %}
               </div>
               <div class="3u 12u(mobile)">
 

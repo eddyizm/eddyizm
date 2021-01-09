@@ -14,7 +14,9 @@ def post_detail(request, id, slug):
     query_pk_and_slug = True
     post = BlogPost.objects.get(pk = id, slug=slug);
     posts = BlogPost.objects.all()[:5];
-    return render_to_response('blog/post.html', {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var})
+    categories = Category.objects.all();
+    return render_to_response('blog/post.html', 
+    {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories })
 
 def blog(request):
     return render(
@@ -29,7 +31,18 @@ def blog(request):
 def blog_posts(request):
     posts = BlogPost.objects.all().order_by('-date')[:3];
     recent_posts = BlogPost.objects.all()[:5];
-    return render_to_response('blog/blog.html', {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var })
+    categories = Category.objects.all();
+    return render_to_response('blog/blog.html', 
+    {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var, 'categories': categories })
+
+
+def blog_category(request, category):
+    posts = BlogPost.objects.filter(categories__name__contains=category)
+    recent_posts = BlogPost.objects.all()[:5];
+    categories = Category.objects.all();
+    return render_to_response('blog/category.html', 
+        {'posts': posts, 'category': category,'recent_posts': recent_posts, 'year':year_var, 'categories': categories })    
+
 
 def podcasts(request):
     return render(
