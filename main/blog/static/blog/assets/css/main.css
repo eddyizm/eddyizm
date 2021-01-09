@@ -42,11 +42,7 @@
 	blockquote:before, blockquote:after, q:before, q:after {
 		content: '';
 		content: none;
-		
-		-moz-box-shadow: 2px 2px 15px #ccc;
-		-webkit-box-shadow: 2px 2px 15px #ccc;
 		box-shadow: 2px 2px 15px #ccc;
-	
 		border-left-style: solid;
 		border-left-width: 15px;
 		border-right-style: solid;

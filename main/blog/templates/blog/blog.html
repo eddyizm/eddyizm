@@ -15,7 +15,7 @@
                       <h3> <span>by </span> {{ blog_post.author.name }}</h3>
                       <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
                   </header>
-                      <p> {{ blog_post.body|slice:":400"|safe }} . . . </p>
+                      <p> {{ blog_post.body|slice:":200"|safe }} . . . </p>
                 </section>
                 {% endfor %}
               </div>
