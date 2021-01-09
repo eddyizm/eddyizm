@@ -19,7 +19,7 @@
                 <h3> <span>by </span> {{ blog_posts.author.name }}</h3>
                 <h4> <span>on {{ blog_posts.date|date:"F jS o" }} </span></h4>
             </header>
-                <p> {{ blog_posts.body|slice:":400" }} . . . </p>
+                <p> {{ blog_posts.body|slice:":400"|safe }} . . . </p>
           </section>
           {% endfor %}
               </div>
