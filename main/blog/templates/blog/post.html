@@ -18,7 +18,7 @@
                     <div> 
                       Categories:&nbsp;
                       {% for category in post.categories.all %}
-                      <a href="#">
+                      <a href="/blog/c/{{ category.name }}/">
                           {{ category.name }}
                       </a>&nbsp;
                       {% endfor %}
@@ -28,7 +28,7 @@
                       <script>
                                                     
                           var disqus_config = function () {
-                              this.page.url = 'http://eddyizm.com/blog/{{ post.id }}-{{ blog_post.slug }}/';  
+                              this.page.url = 'https://eddyizm.com/blog/{{ post.id }}-{{ blog_post.slug }}/';  
                               this.page.identifier ='/{{ post.id }}-{{ blog_post.slug }}/' ; 
                           };
                           
@@ -78,7 +78,7 @@
                   </header>
                   <ul class="link-list">
                     {% for cat in categories %}
-                    <li><a href="#"> {{ cat.name }} </a></li>
+                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
                     {% endfor %}
                     </ul>
                </section>

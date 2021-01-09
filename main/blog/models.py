@@ -23,7 +23,6 @@ class BlogPost(models.Model):
     )
     categories = models.ManyToManyField('Category', related_name='posts')
     
-
     def get_absolute_url(self):
         kwargs = {
             'pk': self.id,

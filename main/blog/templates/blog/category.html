@@ -7,8 +7,11 @@
             <div class="row">
               <div class="9u 12u(mobile)">
 
+          
+          <section>
+            <header><h2>{{ category }}</h2> </header>
+          </section>
           <!-- Main Content -->
-          <h1>{{ category | title }}</h1>
           {% for blog_posts in posts %}
           <section>
             <header>
@@ -54,7 +57,7 @@
                   </header>
                   <ul class="link-list">
                     {% for cat in categories %}
-                    <li><a href="#"> {{ cat.name }} </a></li>
+                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
                     {% endfor %}
                     </ul>
                </section>

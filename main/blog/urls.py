@@ -6,7 +6,7 @@ from django.urls import path
 urlpatterns = [
     url(r'^$', views.blog_posts, name='blog'),
     path('blog/<int:id>-<str:slug>/', views.post_detail, name='post_detail'),
-    path("<str:category>/", views.blog_category, name="blog_category"),
+    path("blog/c/<str:category>/", views.blog_category, name="blog_category"),
     url(r'^blog/', views.blog_posts , name='blog_posts'),
     url(r'^podcasts/', views.podcasts, name='podcasts'),
     url(r'^about/', views.about, name='about'),
