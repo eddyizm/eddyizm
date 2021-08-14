@@ -2,6 +2,9 @@ from django.db import models
 from django import forms
 from django.urls import reverse
 from django.utils.text import slugify
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
 
 # Create your models here.
 class Author(models.Model):
@@ -16,6 +19,7 @@ class BlogPost(models.Model):
     date = models.DateTimeField()
     body = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
+    image = models.ImageField(upload_to='featured_image/%Y/%m/%d/', blank=True, null=True)
     slug = models.SlugField(
         default='',
         editable=False,
@@ -33,8 +37,20 @@ class BlogPost(models.Model):
 
     def save(self, *args, **kwargs):
         value = self.title
-        self.slug = slugify(value, allow_unicode=True)        
+        self.slug = slugify(value, allow_unicode=True) 
         super().save(*args, **kwargs)
+        if self.image:
+            super().save(*args, **kwargs)
+            new_width = 600
+            img = Image.open(self.image.path)
+            if img.height > 600 or img.weight > 600:
+                new_height =  int(new_width * img.height/img.width)
+                img.thumbnail((new_width, new_height))
+                img.save(self.image.path)
+                
+        
+        # super().save(*args, **kwargs)
+        
 
 
     class Meta:

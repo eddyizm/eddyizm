@@ -25,6 +25,7 @@ SECRET_KEY = 'ir$w6tq!xyl6suz)^(ohclyq23e=jxxk6rap3wd)y!0*y8*m=v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = [
     '192.168.1.67', 
     '192.168.1.66',
@@ -42,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',            
+    'blog',
+    'django_bleach',            
 ]
 
 MIDDLEWARE = [
@@ -75,7 +77,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
+BLEACH_ALLOWED_TAGS = ['p', 'a', 'br','img', 'blockquote', 'q']
+BLEACH_ALLOWED_ATTRIBUTES = ['href']
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
