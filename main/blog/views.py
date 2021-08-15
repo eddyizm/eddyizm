@@ -15,8 +15,16 @@ def post_detail(request, id, slug):
     post = BlogPost.objects.get(pk = id, slug=slug);
     posts = BlogPost.objects.all()[:5];
     categories = Category.objects.all();
+    for cat in post.categories.all():
+        if cat.name == 'Photography':
+            check_cat = True
+            break
+        else: 
+            check_cat = False
+
+    print(f'show_thumb: {check_cat}') 
     return render_to_response('blog/post.html', 
-    {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories })
+    {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories, 'hide_thumb': check_cat })
 
 def blog(request):
     return render(

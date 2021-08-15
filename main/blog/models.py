@@ -41,20 +41,17 @@ class BlogPost(models.Model):
         super().save(*args, **kwargs)
         if self.image:
             super().save(*args, **kwargs)
-            new_width = 600
+            new_width = 800
             img = Image.open(self.image.path)
-            if img.height > 600 or img.weight > 600:
+            if img.height > 800 or img.width > 800:
                 new_height =  int(new_width * img.height/img.width)
-                img.thumbnail((new_width, new_height))
-                img.save(self.image.path)
-                
-        
-        # super().save(*args, **kwargs)
-        
-
+                img.thumbnail((new_width, new_height), Image.ANTIALIAS)
+                cropped = img.crop((0,200,new_width, new_height))
+                cropped.save(self.image.path)
 
     class Meta:
         ordering = ['-date',]
+
 
     def __str__(self):
          return self.title

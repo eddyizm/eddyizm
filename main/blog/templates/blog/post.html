@@ -10,6 +10,9 @@
               <!-- Main Content -->
                 <section>
                   <header>
+                      {% if not hide_thumb %}
+                          <img src="{{ media_url }}{{ post.image.url }}" class="feature-image" alt="{{post.title}}"/>
+                      {% endif %}
                       <h2>{{ post.title }}</h2>
                       <h3> <span>by </span> {{ post.author.name }}</h3>
                       <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
