@@ -1,12 +1,9 @@
 from django.db import models
-from django import forms
 from django.urls import reverse
 from django.utils.text import slugify
 from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
 
-# Create your models here.
+
 class Author(models.Model):
     name = models.CharField(max_length=64)
     email = models.CharField(max_length=64)

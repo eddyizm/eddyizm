@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.views.generic.detail import DetailView
 from blog import views
 from django.urls import path
 

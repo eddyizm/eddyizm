@@ -1,7 +1,6 @@
-from django.shortcuts import render, render_to_response, redirect
-from django.views.generic import TemplateView
-from django.http import HttpResponse, JsonResponse
-import json
+from django.shortcuts import render, render_to_response
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 from datetime import datetime
 from blog.models import *
 from blog.quotes import get_random_q, get_daily_q
@@ -9,7 +8,7 @@ from blog.quotes import get_random_q, get_daily_q
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
 
-# Create your views here.
+
 def post_detail(request, id, slug):
     query_pk_and_slug = True
     post = BlogPost.objects.get(pk = id, slug=slug);
@@ -26,6 +25,7 @@ def post_detail(request, id, slug):
     return render_to_response('blog/post.html', 
     {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories, 'hide_thumb': check_cat })
 
+
 def blog(request):
     return render(
         request,
@@ -35,6 +35,7 @@ def blog(request):
             'year' : year_var
         }
     )
+
 
 def blog_posts(request):
     posts = BlogPost.objects.all().order_by('-date')[:3];
@@ -48,8 +49,13 @@ def blog_category(request, category):
     posts = BlogPost.objects.filter(categories__name__contains=category)
     recent_posts = BlogPost.objects.all()[:5];
     categories = Category.objects.all();
+    paginator = Paginator(posts, 3);
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number) 
     return render_to_response('blog/category.html', 
-        {'posts': posts, 'category': category,'recent_posts': recent_posts, 'year':year_var, 'categories': categories })    
+        {'posts': posts, 'category': category,
+        'recent_posts': recent_posts, 'year':year_var,
+        'categories': categories, 'page_obj': page_obj})    
 
 
 def podcasts(request):
@@ -62,6 +68,7 @@ def podcasts(request):
         }
     )
 
+
 def about(request):
     return render(
         request,
@@ -72,6 +79,7 @@ def about(request):
         }
     )
 
+
 def projects(request):
     return render(
         request,
@@ -81,6 +89,7 @@ def projects(request):
             'year' : year_var
         }
     )    
+
 
 # cfc music player
 def cfc(request):
@@ -94,14 +103,18 @@ def cfc(request):
             'tracks': tracks
         }
     )   
+
+
 # json views for quotes app
 def random_q(request):
     data = get_random_q()
-    return HttpResponse(data, content_type='application/json')     
+    return JsonResponse(data, content_type='application/json', safe=False)     
+
 
 def daily_q(request):
     data = get_daily_q(True)
-    return HttpResponse(data, content_type='application/json')     
+    return JsonResponse(data, content_type='application/json', safe=False)     
+
 
 # index for quotes
 def quote_v(request):
