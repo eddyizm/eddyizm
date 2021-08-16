@@ -16,7 +16,7 @@ class BlogPost(models.Model):
     date = models.DateTimeField()
     body = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
-    image = models.ImageField(upload_to='featured_image/%Y/%m/%d/', blank=True, null=True)
+    image = models.ImageField(upload_to='images/%Y/%m/', blank=True, null=True)
     slug = models.SlugField(
         default='',
         editable=False,

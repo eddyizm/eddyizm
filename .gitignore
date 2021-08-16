@@ -1,7 +1,8 @@
 env/
 .vscode/
-**.sqlite3
+db.sqlite3
 __pycache__/
- blog/__pycache__/
- **.pyc
+blog/__pycache__/
+**.pyc
 main/static/
+settings.py
