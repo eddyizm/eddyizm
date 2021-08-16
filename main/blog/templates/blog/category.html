@@ -12,12 +12,12 @@
             <header><h2>{{ category }}</h2> </header>
           </section>
           <!-- Main Content -->
-          {% for blog_posts in posts %}
+          {% for blog_posts in page_obj %}
           <section>
             <header>
                 <!-- featured image --> 
                 {% if blog_posts.image %}
-                    <img src="{{ media_url }}{{ blog_posts.image.url }}" class="feature-image" alt="{{blog_posts.title}}"/>
+                    <img src="{{ blog_posts.image.url }}" class="feature-image" alt="{{blog_posts.title}}"/>
                 {% endif %}
                 <h2><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a></h2>
                 <h3> <span>by </span> {{ blog_posts.author.name }}</h3>
