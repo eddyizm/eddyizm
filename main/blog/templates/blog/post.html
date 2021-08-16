@@ -10,7 +10,7 @@
               <!-- Main Content -->
                 <section>
                   <header>
-                      {% if not hide_thumb %}
+                      {% if not hide_thumb and post.image %}
                           <img src="{{ media_url }}{{ post.image.url }}" class="feature-image" alt="{{post.title}}"/>
                       {% endif %}
                       <h2>{{ post.title }}</h2>
