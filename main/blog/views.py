@@ -21,7 +21,6 @@ def post_detail(request, id, slug):
         else: 
             check_cat = False
 
-    print(f'show_thumb: {check_cat}') 
     return render_to_response('blog/post.html', 
     {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories, 'hide_thumb': check_cat })
 
