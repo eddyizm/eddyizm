@@ -15,6 +15,10 @@
           {% for blog_posts in posts %}
           <section>
             <header>
+                <!-- featured image --> 
+                {% if blog_posts.image %}
+                    <img src="{{ media_url }}{{ blog_posts.image.url }}" class="feature-image" alt="{{blog_posts.title}}"/>
+                {% endif %}
                 <h2><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a></h2>
                 <h3> <span>by </span> {{ blog_posts.author.name }}</h3>
                 <h4> <span>on {{ blog_posts.date|date:"F jS o" }} </span></h4>
@@ -22,6 +26,25 @@
                 <p> {{ blog_posts.body|slice:":200"|bleach }} . . . </p>
           </section>
           {% endfor %}
+          <section>
+            <h2 class="pagination">
+              <span class="step-links">
+                  {% if page_obj.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                  {% endif %}
+
+                  <span class="current">
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span>
+
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}">next</a>
+                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+              </span>
+            </h2>
+          </section>
               </div>
               <div class="3u 12u(mobile)">
 
