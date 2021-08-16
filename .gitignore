@@ -6,3 +6,4 @@ blog/__pycache__/
 **.pyc
 main/static/
 settings.py
+media/
