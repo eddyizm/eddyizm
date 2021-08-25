@@ -16,5 +16,5 @@ requests==2.23.0
 shiboken2==5.12.1
 six==1.15.0
 sqlparse==0.3.1
-urllib3==1.25.6
+urllib3==1.26.5
 webencodings==0.5.1
