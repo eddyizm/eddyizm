@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^about/', views.about, name='about'),
     url(r'^projects/chosenfewchildren/', views.cfc, name='chosenfewchildren'),
     url(r'^projects/', views.projects, name='projects'),
+    url(r'^search/', views.search_blogposts , name='search_results' ),
     # quotes app routes
     url(r'^quotes/random/', views.random_q , name='random'),
     url(r'^quotes/daily/', views.daily_q , name='daily'),

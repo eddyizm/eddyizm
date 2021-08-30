@@ -1,9 +1,12 @@
-from django.shortcuts import render, render_to_response
-from django.core.paginator import Paginator
-from django.http import JsonResponse
 from datetime import datetime
+
+from django.core.paginator import Paginator
+from django.db.models.query_utils import Q
+from django.http import JsonResponse
+from django.shortcuts import render, render_to_response
+from django.views.generic.list import ListView
 from blog.models import *
-from blog.quotes import get_random_q, get_daily_q
+from blog.quotes import get_daily_q, get_random_q
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
@@ -55,6 +58,22 @@ def blog_category(request, category):
         {'posts': posts, 'category': category,
         'recent_posts': recent_posts, 'year':year_var,
         'categories': categories, 'page_obj': page_obj})    
+
+
+# search blog posts
+def search_blogposts(request):
+    if request.method =='GET':
+        query = request.GET.get('q')
+        posts = BlogPost.objects.filter(
+          Q(title__icontains=query) | Q(body__icontains=query)  
+        )
+        recent_posts = BlogPost.objects.all()[:5];
+        categories = Category.objects.all();
+        results = posts.count();
+        return render_to_response('blog/search_results.html', 
+        {'posts': posts, 'recent_posts': recent_posts,
+         'year':year_var, 'q': query, 'records': results,
+        'categories': categories})    
 
 
 def podcasts(request):
@@ -124,3 +143,4 @@ def quote_v(request):
             'title':'Daily Quotes', 'q' : q ,'year': year_var
         }
     )  
+

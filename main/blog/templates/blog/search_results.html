@@ -7,22 +7,24 @@
             <div class="row">
               <div class="9u 12u(mobile)">
 
-                <!-- Main Content -->
-                {% for blog_post in posts %}
-                <section>
-                  <header>
-                    <!-- featured image --> 
-                    {% if blog_post.image %}
-                        <img src="{{ media_url }}{{ blog_post.image.url }}" class="feature-image" alt="{{post.title}}"/>
-                    {% endif %}
-                    <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }} </a></h2>
-                    <h3> <span>by </span> {{ blog_post.author.name }}</h3>
-                    <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
-                  </header>
-                      <p> {{ blog_post.body|slice:":200"|bleach }} . . . </p>
-                </section>
-                {% endfor %}
-              </div>
+          <section>
+            {% if records == 0 %}
+            <header><h2>No records found for: {{ q }}</h2> 
+              <h4>Try again Bob?</h4>  
+            </header>
+              {% else %}
+              <header><h2>Search Results for: {{ q }}</h2> 
+              <h4>{{ records }} results.</h4></header>
+              <!-- results  -->
+              {% for blog_posts in posts %}
+              <span><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a>
+              on {{ blog_posts.date|date:"F jS o" }} by {{ blog_posts.author.name }} : {{ blog_posts.body|slice:":100"|bleach }} . . .</span>
+              <br>
+              {% endfor %}
+            {% endif %}
+          </section>
+          
+          </div>
               <div class="3u 12u(mobile)">
 
                 <!-- Sidebar -->
@@ -49,7 +51,7 @@
                </section>
                  <section>
                   <p>
-                    <a class="twitter-timeline"  data-tweet-limit="3" href="https://twitter.com/eddyizm?ref_src=twsrc%5Etfw">Tweets by eddyizm</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>              
+                    <a class="twitter-timeline"  data-tweet-limit="3" href="https://twitter.com/eddyizm?ref_src=twsrc%5Etfw">Tweets by eddyizm</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     </p>
                </section>
 
