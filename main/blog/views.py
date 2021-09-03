@@ -1,16 +1,19 @@
 from datetime import datetime
 
+from django.http.response import HttpResponse
+from .forms import ContactForm
 from django.core.paginator import Paginator
+from django.core.mail import BadHeaderError
 from django.db.models.query_utils import Q
 from django.http import JsonResponse
-from django.shortcuts import render, render_to_response
+from django.shortcuts import redirect, render, render_to_response
 from django.views.generic.list import ListView
 from blog.models import *
-from blog.quotes import get_daily_q, get_random_q
+from blog.quotes import get_daily_q, get_random_q, send_message
+
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
-
 
 def post_detail(request, id, slug):
     query_pk_and_slug = True
@@ -88,12 +91,34 @@ def podcasts(request):
 
 
 def about(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        print(f'form valid? : {form.is_valid()}')
+        print({form.cleaned_data['subject']})
+        if form.is_valid() and form.cleaned_data['subject'] == '':
+            subject = "Website Inquiry" 
+            body = {
+			'from_email': form.cleaned_data['from_email'], 
+			'message':form.cleaned_data['message'], }
+            message = "\n".join(body.values())
+            try:
+                send_message(message) 
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect("/about/?p=Success")
+
+    form = ContactForm()
+    success_post = request.GET.get('p')
+    success_post = True if success_post == 'Success' else False
+       
     return render(
         request,
         'blog/about.html',
         {
             'title':'About',
-            'year' : year_var
+            'year' : year_var,
+            'form': form,
+            'thankyou': success_post,
         }
     )
 

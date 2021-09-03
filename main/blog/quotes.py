@@ -3,14 +3,9 @@ import json
 import requests
 import os
 from datetime import datetime as d
-# import os.path
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# db_path = os.path.join(BASE_DIR, "PupilPremiumTable.db")
-if os.name == 'nt':
-    logintext = "C:\\Users\\cervantes\\Downloads\\login.txt"
-else:
-    logintext = "/home/eddyizm/sitefiles/login.txt"
-    
+
+api_key = os.environ['MAILGUN_API']    
+
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
 insertQuoteH = 'INSERT INTO QuoteHistory VALUES (?, ?)'
@@ -57,7 +52,7 @@ def get_daily_q(rtn_json):
   else:
     return rows
 
-def send_quote(email, quote, fname, api_key ):
+def send_quote(email, quote, fname):
   return requests.post(
         "https://api.mailgun.net/v3/mg.eddyizm.com/messages",
         auth=("api", api_key),
@@ -83,6 +78,7 @@ def send_quote(email, quote, fname, api_key ):
                         </table>
                         </body>
                         </html>'''.format(quote, 'test')})
+
 # process 5 emails at a time
 def get_email_queue():
   conn = sqlite3.connect(sqlite_file)
@@ -100,24 +96,29 @@ def update_hist(date, emailID, quoteID):
   conn.commit()
   conn.close()
 
-def get_api():
-  with open(logintext, 'r') as g:
-     login = g.read().splitlines()
-     return login[0]
 
 def do_the_work():
   try:
     emails = get_email_queue()
-    _api_key = get_api()
     currDate = d.now().strftime("%Y-%m-%d")
     for e in emails:
-      send_quote(e[1], e[4], e[0], _api_key)
+      send_quote(e[1], e[4], e[0])
       update_hist(currDate, e[2], e[3])
       print ('email sent {}'.format(e[1]))
       
   except:
     pass
 
+
+def send_message(message):
+  return requests.post(
+        "https://api.mailgun.net/v3/mg.eddyizm.com/messages",
+        auth=("api", api_key),
+        data={"from": "Postmaster <postmaster@mg.eddyizm.com>",
+              "to": 'eddyizm@gmail.com',
+              "subject": "Website Inquiry",
+              "text": message
+              })
 
 if __name__ == '__main__':
   hour_check = d.utcnow().hour

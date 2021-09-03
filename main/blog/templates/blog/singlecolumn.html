@@ -1,42 +1,60 @@
 <!-- Content -->
 <div id="content-wrapper">
-  <div id="content">
-    <div class="container">
-      <div class="row">
-        <div class="12u">
-
-          <!-- Main Content -->
-            <section>
-              <header>
-                <h2>about</h2>
-                <h3>This was my old bio</h3>
-              </header>
-              <p>
-                Eduardo Cervantes is a point and shoot photographer and all around wanker.<br>
-                Eduardo Cervantes has the ability to show the world in a way that simultaneously irrational and logical.<br>
-                His eyes are so powerful he can see through time, forwards, backwards and sideways.
-                His images will make you double over with thought–unless your head explodes first.<br>
-                He normally doesn’t talk about himself in third person and really tries to not take himself too seriously.
-              </p>
-              <!-- <p>
-                Sed faucibus viverra ligula, non varius magna semper vitae. Donec eu justo ut ipsum
-                hendrerit congue nec eu risus. Cum sociis natoque penatibus et magnis dis parturient
-                montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing
-                egestas tempus. Cras convallis odio sit amet risus convallis porttitor. Integer
-                vehicula fermentum ligula at pretium. Suspendisse semper iaculis eros, eu aliquam
-                justo imperdiet vel. Proin nec dictum mi. Duis commodo enim non tellus interdum
-                elit. Suspendisse fermentum adipiscing nisi, a tempor libero malesuada at. Morbi
-                lacinia dui adipiscing risus eleifend tincidunt. Proin eu mauris eu tellus eleifend
-                hendrerit.
-              </p> -->
-              <p>
-                I will update this in the near future, which usually means never.
-              </p>
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <!-- Main Content -->
+                    <section>
+                        <header>
+                            <h2>about</h2>
+                            <h3>This was my old bio</h3>
+                        </header>
+                        <p>
+                            Eduardo Cervantes is a point and shoot photographer
+                            and all around wanker.<br />
+                            Eduardo Cervantes has the ability to show the world
+                            in a way that simultaneously irrational and
+                            logical.<br />
+                            His eyes are so powerful he can see through time,
+                            forwards, backwards and sideways. His images will
+                            make you double over with thought–unless your head
+                            explodes first.<br />
+                            He normally doesn’t talk about himself in third
+                            person and really tries to not take himself too
+                            seriously.
+                        </p>
               
-            </section>
+                        <p>
+                            I will update this in the near future, which usually
+                            means never.
+                        </p>
 
+                        <div class="container">
+                          {% if thankyou %}
+                          <h2>Thank you for the message Bob! </h2>
+                          {% else %}
+                          <h3>Say Hello</h3>
+                          <form method="post">
+                              {% csrf_token %}
+                          <div class="form-group">
+                              {{ form.from_email }}
+                          </div>
+                          <div class="form-group">
+                            {{ form.subject }}
+                          </div>
+                          <div class="form-group">
+                            {{ form.message }}
+                          </div>
+                          <div class="form-group">
+                              <input class="button-small" type="submit" value="Submit">
+                          </div>
+                          </form>
+                          {% endif %}
+                      </div>
+                    </section>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
