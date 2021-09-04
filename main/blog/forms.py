@@ -10,7 +10,7 @@ class ContactForm(forms.Form):
                 }), required=True)
     message = forms.CharField(widget=forms.Textarea(attrs={
                 'class': "form-control",
-                'style': 'max-width: 300px; max-height: 300px',
+                'style': 'max-width: 300px; max-height: 300px; height: 150px;',
                 'placeholder': 'Message'
                 }), required=True)
     subject = forms.CharField(widget=forms.HiddenInput(), required=False)                
