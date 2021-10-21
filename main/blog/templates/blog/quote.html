@@ -4,21 +4,21 @@
 {% load staticfiles %}
 
 <div id="features-wrapper">
-        <div id="features">
-          
-          <div class="container">
-                {% for quotes in q %}
-            <div class="row" style="margin-top: 6em;" >
-                   
-              <div class="12u 12u(mobile)" style="margin-bottom: 6em;">
-                <!-- <a href="#" class="button-big">{{ quotes.quote }}</a> -->
-                <!-- <h3> click for a random quote </h3> -->
-                <h1>{{ quotes.quote }} </h1>
-              </div>
-             
+    <div id="features">
+
+        <div class="container">
+            {% for quotes in q %}
+            <div class="row" style="margin-top: 6em;">
+
+                <div class="12u 12u(mobile)" style="margin-bottom: 6em;">
+                    <!-- <a href="#" class="button-big">{{ quotes.quote }}</a> -->
+                    <!-- <h3> click for a random quote </h3> -->
+                    <h1>{{ quotes.quote }} </h1>
+                </div>
+
             </div>
             {% endfor %}
-        <!-- <div class="row">
+            <!-- <div class="row">
             <div class="12u 12u(mobile)">
                 <form action="/coming/" method="post">
                     <div>
@@ -31,37 +31,40 @@
                 </form>
             </div>
         </div> -->
-          </div>
-        
         </div>
+
+    </div>
 
 </div>
 
-<div id="content-wrapper" >
-        <div id="content">
-            <div class="container">
-                <div class="row">
-                        <div class="12u" >
-                                <section>
+<div id="content-wrapper">
+    <div id="content">
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                <!-- <section>
                         <form id="contact-form" role="form" style="margin: 0 auto; width: 100%">
-                                <div class="ajax-hidden">
-                                    <div class="form-group wow fadeInUp">
-                                        <label class="sr-only" for="c_name">Name</label>
-                                        <input type="text" id="c_name" class="form-control" name="c_name" placeholder="Name">
-                                    </div>
-                                    <br>
-                                    <div class="fom-group wow fadeInUp" data-wow-delay=".1s">
-                                        <label class="sr-only" for="c_email">Email</label>
-                                        <input type="email" id="c_email" class="form-control" name="c_email" placeholder="E-mail">
-                                    </div>
-                                    <br>
-                                    <button id="btnSubscribe" type="submit" class="button-small" data-wow-delay=".3s">Subscribe</button>
+                            <div class="ajax-hidden">
+                                <div class="form-group wow fadeInUp">
+                                    <label class="sr-only" for="c_name">Name</label>
+                                    <input type="text" id="c_name" class="form-control" name="c_name"
+                                        placeholder="Name">
                                 </div>
-                                <div class="ajax-response"></div>
-                            </form>
+                                <br>
+                                <div class="fom-group wow fadeInUp" data-wow-delay=".1s">
+                                    <label class="sr-only" for="c_email">Email</label>
+                                    <input type="email" id="c_email" class="form-control" name="c_email"
+                                        placeholder="E-mail">
+                                </div>
+                                <br>
+                                <button id="btnSubscribe" type="submit" class="button-small"
+                                    data-wow-delay=".3s">Subscribe</button>
                             </div>
-                        </section>
-                    </div>
+                            <div class="ajax-response"></div>
+                        </form>
+                </div>
+                </section> -->
+            </div>
         </div>
     </div>
 </div>

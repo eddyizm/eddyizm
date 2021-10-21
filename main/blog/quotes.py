@@ -4,7 +4,7 @@ import requests
 import os
 from datetime import datetime as d
 
-api_key = os.environ['MAILGUN_API']    
+api_key = 'debug' # os.environ['MAILGUN_API']    
 
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
@@ -25,8 +25,11 @@ def get_random_q():
   conn.row_factory = sqlite3.Row
   c = conn.cursor()
   rows = c.execute('''select quote, ID from randomQview''').fetchall()
+  data = { "quote": rows[0][0],
+    "ID": rows[0][1]   
+  } 
   conn.close()
-  return json.dumps( [dict(ix) for ix in rows] )
+  return data
 
 def insert_daily_q():
   currDate = d.now().strftime("%Y-%m-%d")
@@ -47,8 +50,13 @@ def get_daily_q(rtn_json):
   c = conn.cursor()
   rows = c.execute(daily_q).fetchall()
   conn.close()
+  data = { "quote": rows[0][0],
+    "dateSent": rows[0][1],
+    "quoteID_FK": rows[0][2],
+    "category": rows[0][3] 
+  } 
   if rtn_json:
-    return json.dumps( [dict(ix) for ix in rows] )
+    return data
   else:
     return rows
 
