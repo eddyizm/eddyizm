@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render, render_to_response
 from django.views.generic.list import ListView
 from blog.models import *
 from blog.quotes import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
-
+import json
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
@@ -183,7 +183,7 @@ def get_ffe_version(request):
             else:
                 return JsonResponse({'message':'401 Unauthorized'}, status=401)
         except:
-            return JsonResponse({'message':'401 Unauthorized'}, status=401)
+            return JsonResponse({'message': '500 InternalError'}, status=500)
     else: 
         data = get_FFE()
         return JsonResponse(data, content_type='application/json', safe=False)  
