@@ -20,6 +20,33 @@ AND q.quoteID_FK NOT IN (SELECT  quoteID_FK from EHistory WHERE dateSent='1900-0
 emailsQueue = '''SELECT firstName, emailAddress, emailID, quoteID_FK, quote FROM emailToSend ORDER BY RANDOM() LIMIT 5'''
 updateHistoryQ = "UPDATE EHistory SET dateSent = ? WHERE email_ID_FK = ? and quoteID_FK =? "
 
+# flat file code
+updateFFEVersion = "UPDATE FFEAppVersion SET DateUpdated = ?, Version = ?, URL = ? WHERE AppName = 'FlatFileExporter';"
+getFFEVersion = "select Version, DateUpdated, URL from FFEAppVersion;"
+
+
+def update_FFE(version: str, URL: str):
+  ''' Update version available for app to check'''
+  currDate = d.now().strftime("%Y-%m-%d")
+  with sqlite3.connect(sqlite_file) as conn:
+    c = conn.cursor()
+    c.execute(updateFFEVersion, (currDate, version, URL))
+    conn.commit()   
+  
+
+def get_FFE():
+  ''' Get version and url '''
+  currDate = d.now().strftime("%Y-%m-%d")
+  with sqlite3.connect(sqlite_file) as conn:
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    rows = c.execute(getFFEVersion).fetchall()
+    data = {"Version": rows[0][0],
+          "DateUpdated": rows[0][1],
+          "URL": rows[0][2] }   
+  return data
+
+
 def get_random_q():
   conn = sqlite3.connect(sqlite_file)
   conn.row_factory = sqlite3.Row
@@ -104,7 +131,6 @@ def update_hist(date, emailID, quoteID):
   conn.commit()
   conn.close()
 
-
 def do_the_work():
   try:
     emails = get_email_queue()
@@ -116,7 +142,6 @@ def do_the_work():
       
   except:
     pass
-
 
 def send_message(message):
   return requests.post(

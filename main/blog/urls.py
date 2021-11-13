@@ -16,5 +16,9 @@ urlpatterns = [
     url(r'^quotes/random/', views.random_q , name='random'),
     url(r'^quotes/daily/', views.daily_q , name='daily'),
     url(r'^quotes/', views.quote_v , name='quotes'),
+    # application api
+    url(r'^api/v1/flat_file_version', views.get_ffe_version , name='ffe_version'),
+
+
 ]
 

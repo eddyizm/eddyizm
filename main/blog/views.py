@@ -1,5 +1,5 @@
 from datetime import datetime
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http.response import HttpResponse
 from .forms import ContactForm
 from django.core.paginator import Paginator
@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render, render_to_response
 from django.views.generic.list import ListView
 from blog.models import *
-from blog.quotes import get_daily_q, get_random_q, send_message
+from blog.quotes import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
 
 
 # get current year for display in footer
@@ -156,7 +156,7 @@ def random_q(request):
 
 def daily_q(request):
     data = get_daily_q(True)
-    return JsonResponse(data, content_type='application/json', safe=False)     
+    return JsonResponse(data, content_type='application/json', safe=False) 
 
 
 # index for quotes
@@ -169,3 +169,22 @@ def quote_v(request):
         }
     )  
 
+
+# flat file api
+@csrf_exempt
+def get_ffe_version(request):
+    if request.method == 'POST':
+        post_data = request.POST.dict()
+        try: 
+            if post_data['kt'] == '12345':
+                print(f"Update version to: {post_data['version']}")
+                update_FFE(post_data['version'], post_data['URL'])
+                return JsonResponse({'message':'Successfully Updated'}, status=201)
+            else:
+                return JsonResponse({'message':'401 Unauthorized'}, status=401)
+        except:
+            return JsonResponse({'message':'401 Unauthorized'}, status=401)
+    else: 
+        data = get_FFE()
+        return JsonResponse(data, content_type='application/json', safe=False)  
+     
