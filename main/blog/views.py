@@ -183,7 +183,7 @@ def get_ffe_version(request):
             else:
                 return JsonResponse({'message':'401 Unauthorized'}, status=401)
         except:
-            return JsonResponse({'message': '500 InternalError'}, status=500)
+            return JsonResponse({'message': '401 Unauthorized'}, status=401)
     else: 
         data = get_FFE()
         return JsonResponse(data, content_type='application/json', safe=False)  
