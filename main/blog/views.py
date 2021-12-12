@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render, render_to_response
 from django.views.generic.list import ListView
 from blog.models import *
 from blog.quotes import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
-import json
+
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
@@ -79,12 +79,12 @@ def search_blogposts(request):
         'categories': categories})    
 
 
-def podcasts(request):
+def software(request):
     return render(
         request,
-        'blog/podcasts.html',
+        'blog/software.html',
         {
-            'title':'Podcasts',
+            'title':'Software',
             'year' : year_var
         }
     )
