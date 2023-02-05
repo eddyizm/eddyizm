@@ -7,3 +7,4 @@ blog/__pycache__/
 main/static/
 settings.py
 media/
+main/db.sqlite3
