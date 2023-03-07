@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from PIL import Image
+from tinymce.models import HTMLField
 
 
 class Author(models.Model):
@@ -14,7 +15,7 @@ class Author(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateTimeField()
-    body = models.TextField()
+    body = HTMLField()
     author = models.ForeignKey(Author, on_delete=models.DO_NOTHING,)
     image = models.ImageField(upload_to='images/%Y/%m/', blank=True, null=True)
     slug = models.SlugField(
