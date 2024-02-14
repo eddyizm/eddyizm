@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.core.mail import BadHeaderError
 from django.db.models.query_utils import Q
 from django.http import JsonResponse
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from blog.models import *
 from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
@@ -26,7 +26,7 @@ def post_detail(request, id, slug):
         else: 
             check_cat = False
 
-    return render_to_response('blog/post.html', 
+    return render(request, 'blog/post.html', 
     {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories, 'hide_thumb': check_cat })
 
 
@@ -45,7 +45,7 @@ def blog_posts(request):
     posts = BlogPost.objects.all().order_by('-date')[:3];
     recent_posts = BlogPost.objects.all()[:5];
     categories = Category.objects.all();
-    return render_to_response('blog/blog.html', 
+    return render(request, 'blog/blog.html', 
     {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var, 'categories': categories })
 
 
@@ -56,7 +56,7 @@ def blog_category(request, category):
     paginator = Paginator(posts, 3);
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) 
-    return render_to_response('blog/category.html', 
+    return render(request, 'blog/category.html', 
         {'posts': posts, 'category': category,
         'recent_posts': recent_posts, 'year':year_var,
         'categories': categories, 'page_obj': page_obj})    
@@ -72,7 +72,7 @@ def search_blogposts(request):
         recent_posts = BlogPost.objects.all()[:5];
         categories = Category.objects.all();
         results = posts.count();
-        return render_to_response('blog/search_results.html', 
+        return render(request, 'blog/search_results.html', 
         {'posts': posts, 'recent_posts': recent_posts,
          'year':year_var, 'q': query, 'records': results,
         'categories': categories})    
@@ -161,7 +161,8 @@ def daily_q(request):
 # index for quotes
 def quote_v(request):
     q = get_daily_q(False)
-    return render_to_response(
+    return render(
+        request, 
         'blog/quote.html',
         {
             'title':'Daily Quotes', 'q' : q ,'year': year_var
