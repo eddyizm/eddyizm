@@ -13,4 +13,4 @@ class ContactForm(forms.Form):
                 'style': 'max-width: 300px; max-height: 300px; height: 150px;',
                 'placeholder': 'Message'
                 }), required=True)
-    subject = forms.CharField(widget=forms.HiddenInput(), required=False)                
+    subject = forms.CharField(widget=forms.HiddenInput(), required=False)

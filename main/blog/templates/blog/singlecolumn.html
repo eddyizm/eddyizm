@@ -1,4 +1,5 @@
 {% load static %}
+{% load honeypot %}
 <!-- Content -->
 <div id="content-wrapper">
     <div id="content">
@@ -39,6 +40,9 @@
                           <div class="form-group">
                               {{ form.from_email }}
                           </div>
+                          <div class="form-group">
+                            {% render_honeypot_field %}
+                        </div>
                           <div class="form-group">
                             {{ form.subject }}
                           </div>

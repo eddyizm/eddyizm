@@ -10,6 +10,7 @@ from django.shortcuts import redirect, render
 from django.views.generic.list import ListView
 from blog.models import *
 from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
+from honeypot.decorators import check_honeypot
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
@@ -88,7 +89,7 @@ def software(request):
         }
     )
 
-
+@check_honeypot
 def about(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
