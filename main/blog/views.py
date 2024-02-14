@@ -9,8 +9,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render, render_to_response
 from django.views.generic.list import ListView
 from blog.models import *
-from blog.quotes import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
-
+from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
