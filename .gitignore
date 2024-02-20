@@ -8,3 +8,5 @@ main/static/
 settings.py
 media/
 main/db.sqlite3
+.env
+.dev.env

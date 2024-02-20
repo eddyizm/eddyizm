@@ -61,7 +61,7 @@ class Category(models.Model):
                                                 
     def __str__(self):                          
         return self.name
-        
+
 
 class MusicTrack(models.Model):
     artist = models.CharField(max_length=64)
