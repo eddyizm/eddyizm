@@ -72,11 +72,12 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_HSTS_SECONDS = 2592000 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
+print(f"get db path from container: {os.path.join(os.getenv('DB_PATH'), os.getenv('DB_FILE'))}")
 # database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.getenv('DB_PATH'), os.getenv('DB_FILE')),
+        'NAME': os.path.join(os.getenv('DB_PATH'), str(os.getenv('DB_FILE'))),
     }
 }
 
