@@ -11,3 +11,4 @@ media/
 main/db.sqlite3
 .env
 .dev.env
+static/
