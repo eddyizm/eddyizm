@@ -1,0 +1,42 @@
+{
+	debug
+}
+
+# reusable snippets
+(boilerplate) {
+        encode gzip zstd
+}
+
+eddyizm.com {
+
+        log {
+        output file /var/log/caddy/eddyizm.com-access.log {
+                roll_size 10mb
+                roll_keep 20
+                roll_keep_for 720h
+                }
+        }
+                
+        handle_path /static/* {
+        root * /home/eddyizm/static/
+        file_server
+        
+        // handle_path /data/* {
+        // root * /home/eddyizm/data/
+        // file_server
+        // }
+                
+        handle_path /media/* {
+        root * /home/eddyizm/media/
+        file_server
+        }
+
+        reverse_proxy http://localhost:8000
+        import boilerplate
+        tls eddyizm@gmail.com
+}
+
+www.eddyizm.com {
+    redir https://eddyizm.com{uri}
+    import boilerplate
+}
