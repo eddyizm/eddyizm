@@ -20,12 +20,7 @@ eddyizm.com {
         handle_path /static/* {
         root * /home/eddyizm/static/
         file_server
-        
-        // handle_path /data/* {
-        // root * /home/eddyizm/data/
-        // file_server
-        // }
-                
+              
         handle_path /media/* {
         root * /home/eddyizm/media/
         file_server
