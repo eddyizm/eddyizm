@@ -8,6 +8,7 @@ dotenv_path = os.path.join(BASE_DIR, '.dev.env')
 load_dotenv(dotenv_path)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
+MAILGUN_KEY = os.getenv('MAILGUN_KEY')
 
 DEBUG = False if str(os.getenv('DEBUG')) == 'prod' else True
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
@@ -69,8 +70,10 @@ HONEYPOT_FIELD_NAME = os.getenv('HONEYPOT_FIELD_NAME')
 # security headers
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
-SECURE_HSTS_SECONDS = 2592000 
+SECURE_HSTS_SECONDS = 2592000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 # database
 DATABASES = {

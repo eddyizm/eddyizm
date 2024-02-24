@@ -2,8 +2,9 @@ import sqlite3
 import requests
 import os
 from datetime import datetime as d
+from django.conf import settings
 
-api_key = 'debug' # os.environ['MAILGUN_API']    
+api_key = settings.MAILGUN_KEY
 
 # queries
 daily_q = 'SELECT quote, dateSent, quoteID_FK, category FROM  dailyQview;'
