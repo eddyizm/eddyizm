@@ -5,19 +5,15 @@ click==8.1.7
 Django==4.2.10
 django-bleach==0.6.1
 django-honeypot==1.0.3
+gunicorn==21.2.0
 idna==3.6
-# Markdown==3.2.1
 packaging==23.2
 Pillow==10.2.0
 pyparsing==2.4.7
 python-dotenv==1.0.0
-# PySide2==5.12.1
 pytz==2017.3
-# PyYAML==5.4.1
 requests==2.31.0
-# shiboken2==5.12.1
 six==1.15.0
 sqlparse==0.4.4
-# typing-extensions==4.7.1
 urllib3==2.1.0
 webencodings==0.5.1
