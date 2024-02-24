@@ -7,7 +7,7 @@ from . import views
 
 
 urlpatterns = [
-    re_path(r'^admin/', admin.site.urls, name='admin-site'),
+    re_path(f'^{settings.ADMIN_URL}/', admin.site.urls, name='admin-site'),
     re_path(r'^', include('blog.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -15,6 +15,5 @@ urlpatterns = [
 handler404 = views.error_404
 handler500 = views.error_500
 
-if settings.DEBUG: 
+if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

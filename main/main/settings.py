@@ -99,6 +99,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Admin url
+ADMIN_URL = os.getenv('ADMIN_URL')
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
