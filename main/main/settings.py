@@ -9,6 +9,7 @@ load_dotenv(dotenv_path)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
+FFE_KEY = os.getenv('FFE_KEY')
 
 DEBUG = False if str(os.getenv('DEBUG')) == 'prod' else True
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

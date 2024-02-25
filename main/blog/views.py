@@ -1,16 +1,18 @@
 from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
-from django.http.response import HttpResponse
-from .forms import ContactForm
+
+from django.conf import settings
 from django.core.paginator import Paginator
 from django.core.mail import BadHeaderError
 from django.db.models.query_utils import Q
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseServerError
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.views.generic.list import ListView
-from blog.models import *
-from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
+from django.views.decorators.csrf import csrf_exempt
 from honeypot.decorators import check_honeypot
+
+from .forms import ContactForm
+from blog.models import BlogPost, Category, MusicTrack
+from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
 
 # get current year for display in footer
 year_var = datetime.now().strftime('%Y')
@@ -89,7 +91,8 @@ def software(request):
         }
     )
 
-@check_honeypot
+
+@check_honeypot(field_name=settings.HONEYPOT_FIELD_NAME)
 def about(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
@@ -176,16 +179,15 @@ def quote_v(request):
 def get_ffe_version(request):
     if request.method == 'POST':
         post_data = request.POST.dict()
-        try: 
-            if post_data['kt'] == '12345':
+        try:
+            if post_data['kt'] == settings.FFE_KEY:
                 print(f"Update version to: {post_data['version']}")
                 update_FFE(post_data['version'], post_data['URL'])
-                return JsonResponse({'message':'Successfully Updated'}, status=201)
+                return JsonResponse({'message': 'Successfully Updated'}, status=201)
             else:
-                return JsonResponse({'message':'401 Unauthorized'}, status=401)
-        except:
+                return JsonResponse({'message': '401 Unauthorized'}, status=401)
+        except HttpResponseServerError:
             return JsonResponse({'message': '401 Unauthorized'}, status=401)
-    else: 
+    else:
         data = get_FFE()
-        return JsonResponse(data, content_type='application/json', safe=False)  
-     
+        return JsonResponse(data, content_type='application/json', safe=False)
