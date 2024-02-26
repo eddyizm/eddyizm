@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from turnstile.fields import TurnstileField
+
 class ContactForm(forms.Form):
 
     from_email = forms.EmailField(widget=forms.TextInput(
@@ -17,4 +19,5 @@ class ContactForm(forms.Form):
             'placeholder': 'Message',
             'tabindex': '2'
         }), required=True)
+    turnstile = TurnstileField()
     subject = forms.CharField(widget=forms.HiddenInput(), required=False)

@@ -8,7 +8,6 @@ from django.http import JsonResponse, HttpResponseServerError
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
-from honeypot.decorators import check_honeypot
 
 from .forms import ContactForm
 from blog.models import BlogPost, Category, MusicTrack
@@ -92,7 +91,6 @@ def software(request):
     )
 
 
-@check_honeypot(field_name=settings.HONEYPOT_FIELD_NAME)
 def about(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)

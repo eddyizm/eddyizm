@@ -10,6 +10,8 @@ load_dotenv(dotenv_path)
 SECRET_KEY = os.getenv('SECRET_KEY')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
 FFE_KEY = os.getenv('FFE_KEY')
+TURNSTILE_SITEKEY = os.getenv('TURNSTILE_SITEKEY')
+TURNSTILE_SECRET = os.getenv('TURNSTILE_SECRET')
 
 DEBUG = False if str(os.getenv('DEBUG')) == 'prod' else True
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
@@ -30,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'django_bleach',
-    'honeypot',
+    'turnstile',
 ]
 
 MIDDLEWARE = [
@@ -66,7 +68,6 @@ WSGI_APPLICATION = 'main.wsgi.application'
 
 BLEACH_ALLOWED_TAGS = ['p', 'a', 'br', 'img', 'blockquote', 'q']
 BLEACH_ALLOWED_ATTRIBUTES = ['href']
-HONEYPOT_FIELD_NAME = os.getenv('HONEYPOT_FIELD_NAME')
 
 # security headers
 SECURE_CONTENT_TYPE_NOSNIFF = True

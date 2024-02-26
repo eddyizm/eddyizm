@@ -4,7 +4,7 @@ chardet==3.0.4
 click==8.1.7
 Django==4.2.10
 django-bleach==0.6.1
-django-honeypot==1.0.3
+django-turnstile==0.1.0
 gunicorn==21.2.0
 idna==3.6
 packaging==23.2
