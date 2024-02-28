@@ -12,25 +12,72 @@ LOGGING_CONFIG = None
 logging.config.dictConfig({
     'version': 1,
     'disable_existing_loggers': False,
-    'formatters': {
-        'console': {
-            'format': '%(message)s',
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
         },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        }
     },
     'handlers': {
         'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
-            'formatter': 'console',
+        },
+        'console_on_not_debug': {
+            'level': 'WARNING',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
         },
     },
     'loggers': {
-        'gunicorn': {
+        'django': {
+            'handlers': ['console', 'console_on_not_debug'],
             'level': 'INFO',
-            'handlers': ['console'],
-            'propagate': True,
         },
-    },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    }
 })
+
+# logging.config.dictConfig({
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'console': {
+#             'format': '%(message)s',
+#         },
+#     },
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'console',
+#         },
+#     },
+#     'loggers': {
+#         'gunicorn': {
+#             'level': 'INFO',
+#             'handlers': ['console'],
+#             'propagate': True,
+#         },
+#     },
+# })
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
