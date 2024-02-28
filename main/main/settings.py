@@ -26,7 +26,9 @@ logging.config.dictConfig({
         },
     },
     'handlers': {
-        'console': {
+        'console_': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'console',
         },
@@ -34,12 +36,19 @@ logging.config.dictConfig({
             'level': 'WARNING',
             'filters': ['require_debug_false'],
             'class': 'logging.StreamHandler',
+            'formatter': 'console',
         },
+        'console_error': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        }
     },
     'loggers': {
         'gunicorn': {
             'level': 'INFO',
-            'handlers': ['console', 'console_on_not_debug'],
+            'handlers': ['console', 'console_on_not_debug', 'console_error'],
             'propagate': True,
         },
     },
