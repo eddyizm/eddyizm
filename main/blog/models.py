@@ -7,7 +7,7 @@ from PIL import Image
 class Author(models.Model):
     name = models.CharField(max_length=64)
     email = models.CharField(max_length=64)
- 
+
     def __str__(self):
         return "%s (%s)" % (self.name, self.email)
 
@@ -23,14 +23,14 @@ class BlogPost(models.Model):
         max_length=100
     )
     categories = models.ManyToManyField('Category', related_name='posts')
-    
+
     def get_absolute_url(self):
         kwargs = {
             'pk': self.id,
             'slug': self.slug
         }
-        
-        return reverse('post_detail', kwargs={'slug': self.slug, 'id':self.id})
+
+        return reverse('post_detail', kwargs={'slug': self.slug, 'id': self.id})
 
     def save(self, *args, **kwargs):
         value = self.title
@@ -41,25 +41,24 @@ class BlogPost(models.Model):
             new_width = 800
             img = Image.open(self.image.path)
             if img.height > 800 or img.width > 800:
-                new_height =  int(new_width * img.height/img.width)
-                img.thumbnail((new_width, new_height), Image.ANTIALIAS)
-                cropped = img.crop((0,200,new_width, new_height))
+                new_height = int(new_width * img.height / img.width)
+                img.thumbnail((new_width, new_height), Image.Resampling.LANCZOS)
+                cropped = img.crop((0, 200, new_width, new_height))
                 cropped.save(self.image.path)
 
     class Meta:
         ordering = ['-date',]
 
-
     def __str__(self):
-         return self.title
+        return self.title
 
 class Category(models.Model):
     name = models.CharField(max_length=200)
-    
+
     class Meta:
-        verbose_name_plural = "categories"      
-                                                
-    def __str__(self):                          
+        verbose_name_plural = "categories"
+
+    def __str__(self):      
         return self.name
 
 
