@@ -10,5 +10,6 @@ settings.py
 media/
 main/db.sqlite3
 .env
+.prod.env
 .dev.env
 static/

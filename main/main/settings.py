@@ -1,11 +1,36 @@
 import os
+import logging.config
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-dotenv_path = os.path.join(BASE_DIR, '.dev.env')
+dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
+
+LOGGING_CONFIG = None
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'console': {
+            'format': '%(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        },
+    },
+    'loggers': {
+        'gunicorn': {
+            'level': 'INFO',
+            'handlers': ['console'],
+            'propagate': True,
+        },
+    },
+})
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
@@ -66,7 +91,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-BLEACH_ALLOWED_TAGS = ['p', 'a', 'br', 'img', 'blockquote', 'q']
+BLEACH_ALLOWED_TAGS = ['p', 'a', 'br', 'code', 'pre', 'img', 'blockquote', 'q']
 BLEACH_ALLOWED_ATTRIBUTES = ['href']
 
 # security headers
