@@ -1,5 +1,5 @@
 import os
-import logging.config
+# import logging.config
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -8,8 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
 
-LOGGING_CONFIG = None
-logging.config.dictConfig({
+LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'filters': {
@@ -21,38 +20,45 @@ logging.config.dictConfig({
         },
     },
     'formatters': {
-        'console': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
             'format': '%(message)s',
-        },
+        }
     },
     'handlers': {
         'console': {
             'level': 'INFO',
-            'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
-            'formatter': 'console',
         },
         'console_on_not_debug': {
             'level': 'WARNING',
             'filters': ['require_debug_false'],
             'class': 'logging.StreamHandler',
-            'formatter': 'console',
         },
-        'console_error': {
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'error_handler': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'logging.StreamHandler',
-            'formatter': 'console',
+            'formatter': 'django.server',
         }
     },
     'loggers': {
-        'gunicorn': {
+        'django': {
+            'handlers': ['console', 'error_handler', 'console_on_not_debug'],
             'level': 'INFO',
-            'handlers': ['console', 'console_on_not_debug', 'console_error'],
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
             'propagate': True,
         },
-    },
-})
+    }
+}
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 MAILGUN_KEY = os.getenv('MAILGUN_KEY')
@@ -118,7 +124,7 @@ BLEACH_ALLOWED_ATTRIBUTES = ['href']
 
 # security headers
 SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
+SECURE_BROWSER_XSS_FILTER = True    
 SECURE_HSTS_SECONDS = 2592000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -160,7 +166,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = os.getenv('STATIC_URL')
-STATIC_ROOT = os.path.join(os.getenv('STATIC_URL'), 'static/')
-MEDIA_URL = os.getenv('MEDIA_URL')
-MEDIA_ROOT = os.path.join(os.getenv('MEDIA_URL'), 'media/')
+STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+
+if DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+else:
+    STATIC_ROOT = os.getenv('STATIC_ROOT')
+    MEDIA_ROOT = os.getenv('MEDIA_ROOT')
