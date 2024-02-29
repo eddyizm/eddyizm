@@ -18,7 +18,7 @@
                       <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
                   </header>
                   <p> {{ post.body| safe }} </p>
-                    <div> 
+                    <div>
                       Categories:&nbsp;
                       {% for category in post.categories.all %}
                       <a href="/blog/c/{{ category.name }}/">
@@ -29,17 +29,17 @@
                     <div>
                       <div id="disqus_thread"></div>
                       <script>
-                                                    
+
                           var disqus_config = function () {
-                              this.page.url = 'https://eddyizm.com/blog/{{ post.id }}-{{ blog_post.slug }}/';  
-                              this.page.identifier ='/{{ post.id }}-{{ blog_post.slug }}/' ; 
+                              this.page.url = 'https://eddyizm.com/blog/{{ post.id }}-{{ blog_post.slug }}/';
+                              this.page.identifier ='/{{ post.id }}-{{ blog_post.slug }}/' ;
                           };
-                          
+
                           (function() {  // DON'T EDIT BELOW THIS LINE
                               var d = document, s = d.createElement('script');
-                              
+
                               s.src = 'https://eddyizm.disqus.com/embed.js';
-                              
+
                               s.setAttribute('data-timestamp', +new Date());
                               (d.head || d.body).appendChild(s);
                           })();
@@ -72,16 +72,16 @@
                     {% endfor %}
                     </ul>
                </section>
-                 <section>
+                 <!-- <section>
                   <p>
-                    <a class="twitter-timeline"  data-tweet-limit="3" href="https://twitter.com/eddyizm?ref_src=twsrc%5Etfw">Tweets by eddyizm</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>              
+                    # TODO mastadon
                     </p>
-               </section>
-           
+               </section> -->
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-      {% endblock %}	
+      {% endblock %}
