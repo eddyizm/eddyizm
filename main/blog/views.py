@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.core.mail import BadHeaderError
 from django.db.models.query_utils import Q
@@ -8,6 +9,7 @@ from django.http import JsonResponse, HttpResponseServerError
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
+
 
 from .forms import ContactForm
 from blog.models import BlogPost, Category, MusicTrack
@@ -97,10 +99,11 @@ def about(request):
         print(f'form valid? : {form.is_valid()}')
         print({form.cleaned_data['subject']})
         if form.is_valid() and form.cleaned_data['subject'] == '':
-            subject = "Website Inquiry" 
+            subject = "Website Inquiry"
             body = {
-			'from_email': form.cleaned_data['from_email'], 
-			'message':form.cleaned_data['message'], }
+                'from_email': form.cleaned_data['from_email'],
+                'message':form.cleaned_data['message'],
+            }
             message = "\n".join(body.values())
             try:
                 send_message(message) 
@@ -129,10 +132,19 @@ def projects(request):
         request,
         'blog/projects.html',
         {
-            'title':'Projects',
-            'year' : year_var
+            'title': 'Projects',
+            'year': year_var
         }
-    )    
+    )
+
+
+@login_required(login_url=settings.ADMIN_URL)
+def dashboard(request):
+    import os
+    file = os.path.join(settings.STATIC_ROOT, 'blog/report.html')
+    with open(file) as report:
+        response = HttpResponse(report.readlines())
+        return response
 
 
 # cfc music player

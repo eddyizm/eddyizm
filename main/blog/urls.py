@@ -2,6 +2,7 @@ from django.urls import re_path as url
 from blog import views
 from django.urls import path
 
+
 urlpatterns = [
     url(r'^$', views.blog_posts, name='blog'),
     path('blog/<int:id>-<str:slug>/', views.post_detail, name='post_detail'),
@@ -18,7 +19,6 @@ urlpatterns = [
     url(r'^quotes/', views.quote_v, name='quotes'),
     # application api
     url(r'^api/v1/flat_file_version', views.get_ffe_version, name='ffe_version'),
-
-
+    # dashboard
+    url(r'^dashboard/', views.dashboard, name='dashboard'),
 ]
-

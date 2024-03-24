@@ -9,11 +9,11 @@ admin.site.register(Author)
 admin.site.register(Category)
 admin.site.register(MusicTrack)
 
-# Added to get text area in admin area for blog post.         
 class YourModelAdmin(admin.ModelAdmin):
-        formfield_overrides = {
-        models.CharField: {'widget': Textarea(attrs={'rows':5,'cols':40, 'size':'20'})},
-        #models.TextField: {'widget': Textarea(attrs={'rows':5, 'cols':40})},
+    # Added to get text area in admin area for blog post.
+    formfield_overrides = {
+        models.CharField: {'widget': Textarea(attrs={'rows': 5, 'cols': 40, 'size': '20'})},
+        # models.TextField: {'widget': Textarea(attrs={'rows':5, 'cols':40})},
     }
 
-admin.site.register(BlogPost, YourModelAdmin)    
+admin.site.register(BlogPost, YourModelAdmin)
