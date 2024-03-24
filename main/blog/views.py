@@ -140,8 +140,7 @@ def projects(request):
 
 @login_required(login_url=settings.ADMIN_URL)
 def dashboard(request):
-    import os
-    file = os.path.join(settings.STATIC_ROOT, 'blog/report.html')
+    file = f'{settings.STATIC_ROOT}blog/report.html'
     with open(file) as report:
         response = HttpResponse(report.readlines())
         return response
