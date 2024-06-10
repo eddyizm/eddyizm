@@ -35,3 +35,7 @@ www.eddyizm.com {
     redir https://eddyizm.com{uri}
     import boilerplate
 }
+
+resume.eddyizm.com {  
+  redir https://eddyizm.github.io/resume{uri}
+}
