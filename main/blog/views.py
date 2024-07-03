@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from cachetools import TTLCache
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -15,7 +16,8 @@ from .forms import ContactForm
 from blog.models import BlogPost, Category, MusicTrack
 from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
 
-# get current year for display in footer
+
+cache = TTLCache(maxsize=100, ttl=60 * 60 * 6)
 year_var = datetime.now().strftime('%Y')
 
 def post_detail(request, id, slug):
@@ -83,14 +85,16 @@ def search_blogposts(request):
 
 
 def software(request):
-    return render(
+    response = render(
         request,
         'blog/software.html',
         {
-            'title':'Software',
-            'year' : year_var
+            'title': 'Software',
+            'year': year_var
         }
     )
+    response["Cache-Control"] = "public, max-age=21600"
+    return response
 
 
 def about(request):
@@ -128,7 +132,7 @@ def about(request):
 
 
 def projects(request):
-    return render(
+    response = render(
         request,
         'blog/projects.html',
         {
@@ -136,6 +140,8 @@ def projects(request):
             'year': year_var
         }
     )
+    response["Cache-Control"] = "public, max-age=21600"
+    return response
 
 
 @login_required(login_url=settings.ADMIN_URL)
@@ -146,33 +152,37 @@ def dashboard(request):
         return response
 
 
-# cfc music player
 def cfc(request):
+    ''' cfc music player '''
     tracks = MusicTrack.objects.all()
-    return render(
+    response = render(
         request,
         'blog/cfc.html',
         {
-            'title':'Chosen Few Children',
-            'year' : year_var,
+            'title': 'Chosen Few Children',
+            'year': year_var,
             'tracks': tracks
         }
-    )   
+    )
+    response["Cache-Control"] = "public, max-age=21600"
+    return response
 
 
 # json views for quotes app
 def random_q(request):
     data = get_random_q()
-    return JsonResponse(data, content_type='application/json', safe=False)     
+    return JsonResponse(data, content_type='application/json', safe=False)    
 
 
 def daily_q(request):
     data = get_daily_q(True)
-    return JsonResponse(data, content_type='application/json', safe=False) 
+    response = JsonResponse(data, content_type='application/json', safe=False) 
+    response["Cache-Control"] = "public, max-age=21600"
+    return response
 
 
-# index for quotes
 def quote_v(request):
+    # DEPRECIATE
     q = get_daily_q(False)
     return render(
         request, 
