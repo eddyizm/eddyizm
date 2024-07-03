@@ -17,7 +17,7 @@ from blog.models import BlogPost, Category, MusicTrack
 from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
 
 
-cache = TTLCache(maxsize=100, ttl=60 * 60 * 6)
+cache = TTLCache(maxsize=128, ttl=60 * 60 * 2)
 year_var = datetime.now().strftime('%Y')
 
 def post_detail(request, id, slug):
@@ -171,42 +171,40 @@ def cfc(request):
 # json views for quotes app
 def random_q(request):
     data = get_random_q()
-    return JsonResponse(data, content_type='application/json', safe=False)    
+    response = JsonResponse(data, content_type='application/json', safe=False)
+    response["Cache-Control"] = "public, max-age=600"
+    return response
 
 
 def daily_q(request):
-    data = get_daily_q(True)
-    response = JsonResponse(data, content_type='application/json', safe=False) 
+    daily_quote_cache_key = str(datetime.now().date())
+    data = cache.get(daily_quote_cache_key)
+    if data is not None:
+        print(f'Found daily quote key in cache: {daily_quote_cache_key}')
+    else:
+        data = get_daily_q()
+        data['dateSent'] = daily_quote_cache_key
+        cache[daily_quote_cache_key] = data
+    response = JsonResponse(data, content_type='application/json', safe=False)
     response["Cache-Control"] = "public, max-age=21600"
     return response
 
 
-def quote_v(request):
-    # DEPRECIATE
-    q = get_daily_q(False)
-    return render(
-        request, 
-        'blog/quote.html',
-        {
-            'title':'Daily Quotes', 'q' : q ,'year': year_var
-        }
-    )  
-
-
 # flat file api
-@csrf_exempt
-def get_ffe_version(request):
-    if request.method == 'POST':
-        post_data = request.POST.dict()
-        try:
-            if post_data['kt'] == settings.FFE_KEY:
-                print(f"Update version to: {post_data['version']}")
-                update_FFE(post_data['version'], post_data['URL'])
-                return JsonResponse({'message': 'Successfully Updated'}, status=201)
-            else:
-                return JsonResponse({'message': '401 Unauthorized'}, status=401)
-        except HttpResponseServerError:
-            return JsonResponse({'message': '401 Unauthorized'}, status=401)
-    else:
-        data = get_FFE()
-        return JsonResponse(data, content_type='application/json', safe=False)
+# @csrf_exempt
+# def get_ffe_version(request):
+#     ''' DEPRECATED '''
+#     if request.method == 'POST':
+#         post_data = request.POST.dict()
+#         try:
+#             if post_data['kt'] == settings.FFE_KEY:
+#                 print(f"Update version to: {post_data['version']}")
+#                 update_FFE(post_data['version'], post_data['URL'])
+#                 return JsonResponse({'message': 'Successfully Updated'}, status=201)
+#             else:
+#                 return JsonResponse({'message': '401 Unauthorized'}, status=401)
+#         except HttpResponseServerError:
+#             return JsonResponse({'message': '401 Unauthorized'}, status=401)
+#     else:
+#         data = get_FFE()
+#         return JsonResponse(data, content_type='application/json', safe=False)
