@@ -20,68 +20,121 @@ from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, 
 cache = TTLCache(maxsize=128, ttl=60 * 60 * 2)
 year_var = datetime.now().strftime('%Y')
 
-def post_detail(request, id, slug):
-    query_pk_and_slug = True
-    post = BlogPost.objects.get(pk = id, slug=slug);
-    posts = BlogPost.objects.all()[:5];
-    categories = Category.objects.all();
-    for cat in post.categories.all():
-        if cat.name == 'Photography':
-            check_cat = True
-            break
-        else: 
-            check_cat = False
 
-    return render(request, 'blog/post.html', 
-    {'post' : post, 'posts' : posts, 'slug':slug, 'year':year_var, 'categories': categories, 'hide_thumb': check_cat })
+def post_detail(request, id, slug):
+    response = cache.get(id)
+    if response is not None:
+        print(f'Found post detail in cache: {id}')
+    else:
+        post = BlogPost.objects.get(pk=id, slug=slug)
+        posts = BlogPost.objects.all()[:5]
+        categories = Category.objects.all()
+        for cat in post.categories.all():
+            if cat.name == 'Photography':
+                check_cat = True
+                break
+            else:
+                check_cat = False
+        response = render(
+            request,
+            'blog/post.html',
+            {
+                'post': post,
+                'posts': posts,
+                'slug': slug,
+                'year': year_var,
+                'categories': categories,
+                'hide_thumb': check_cat
+            })
+        cache[id] = response
+    response["Cache-Control"] = "public, max-age=518400"
+    return response
 
 
 def blog(request):
-    return render(
+    response = render(
         request,
         'blog/blog.html',
         {
-            'title':'Blog',
-            'year' : year_var
+            'title': 'Blog',
+            'year': year_var
         }
     )
+    response["Cache-Control"] = "public, max-age=600"
+    return response
 
 
 def blog_posts(request):
-    posts = BlogPost.objects.all().order_by('-date')[:3];
-    recent_posts = BlogPost.objects.all()[:5];
-    categories = Category.objects.all();
-    return render(request, 'blog/blog.html', 
-    {'posts' : posts, 'recent_posts': recent_posts, 'year':year_var, 'categories': categories })
+    posts = BlogPost.objects.all().order_by('-date')[:3]
+    recent_posts = BlogPost.objects.all()[:5]
+    categories = Category.objects.all()
+    response = render(
+        request,
+        'blog/blog.html',
+        {
+            'posts': posts,
+            'recent_posts': recent_posts,
+            'year': year_var,
+            'categories': categories
+        })
+    response["Cache-Control"] = "public, max-age=600"
+    return response
 
 
 def blog_category(request, category):
-    posts = BlogPost.objects.filter(categories__name__contains=category)
-    recent_posts = BlogPost.objects.all()[:5];
-    categories = Category.objects.all();
-    paginator = Paginator(posts, 3);
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number) 
-    return render(request, 'blog/category.html', 
-        {'posts': posts, 'category': category,
-        'recent_posts': recent_posts, 'year':year_var,
-        'categories': categories, 'page_obj': page_obj})    
-
+    response = cache.get(category)
+    if response is not None:
+        print(f'category response found in cache: {category}')
+    else:
+        posts = BlogPost.objects.filter(categories__name__contains=category)
+        recent_posts = BlogPost.objects.all()[:5]
+        categories = Category.objects.all()
+        paginator = Paginator(posts, 3)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        response = render(
+            request,
+            'blog/category.html',
+            {
+                'posts': posts,
+                'category': category,
+                'recent_posts': recent_posts,
+                'year': year_var,
+                'categories': categories,
+                'page_obj': page_obj
+            })
+        cache[category] = response
+    response["Cache-Control"] = "public, max-age=600"
+    return response
 
 # search blog posts
 def search_blogposts(request):
-    if request.method =='GET':
+    if request.method == 'GET':
         query = request.GET.get('q')
-        posts = BlogPost.objects.filter(
-          Q(title__icontains=query) | Q(body__icontains=query)  
-        )
-        recent_posts = BlogPost.objects.all()[:5];
-        categories = Category.objects.all();
-        results = posts.count();
-        return render(request, 'blog/search_results.html', 
-        {'posts': posts, 'recent_posts': recent_posts,
-         'year':year_var, 'q': query, 'records': results,
-        'categories': categories})    
+        response = cache.get(query)
+        if response is not None:
+            print(f'found query in cache: {query}')
+        else:
+            posts = BlogPost.objects.filter(
+                Q(title__icontains=query) | Q(body__icontains=query)
+            )
+            recent_posts = BlogPost.objects.all()[:5]
+            categories = Category.objects.all()
+            results = posts.count()
+            response = render(
+                request,
+                'blog/search_results.html',
+                {
+                    'posts': posts,
+                    'recent_posts': recent_posts,
+                    'year': year_var,
+                    'q': query,
+                    'records': results,
+                    'categories': categories
+                })
+            cache[query] = response
+        response["Cache-Control"] = "public, max-age=21600"
+        return response
 
 
 def software(request):
@@ -106,11 +159,11 @@ def about(request):
             subject = "Website Inquiry"
             body = {
                 'from_email': form.cleaned_data['from_email'],
-                'message':form.cleaned_data['message'],
+                'message': form.cleaned_data['message'],
             }
             message = "\n".join(body.values())
             try:
-                send_message(message) 
+                send_message(message)
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect("/about/?p=Success")
@@ -118,13 +171,12 @@ def about(request):
     form = ContactForm()
     success_post = request.GET.get('p')
     success_post = True if success_post == 'Success' else False
-       
     return render(
         request,
         'blog/about.html',
         {
-            'title':'About',
-            'year' : year_var,
+            'title': 'About',
+            'year': year_var,
             'form': form,
             'thankyou': success_post,
         }
