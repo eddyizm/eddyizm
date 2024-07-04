@@ -7,6 +7,24 @@
         encode gzip zstd
 }
 
+(cors) {
+  @cors_preflight method OPTIONS
+  @cors header Origin {args.0}
+
+  handle @cors_preflight {
+    header Access-Control-Allow-Origin "{args.0}"
+    header Access-Control-Allow-Methods "GET, POST, PUT, PATCH, DELETE"
+    header Access-Control-Allow-Headers "Content-Type"
+    header Access-Control-Max-Age "3600"
+    respond "" 204
+  }
+
+  handle @cors {
+    header Access-Control-Allow-Origin "{args.0}"
+    header Access-Control-Expose-Headers "Link"
+  }
+}
+
 eddyizm.com {
 
         log {
@@ -20,15 +38,30 @@ eddyizm.com {
         handle_path /static/* {
         root * /home/eddyizm/static/
         file_server
-              
+        }
+
         handle_path /media/* {
         root * /home/eddyizm/media/
+        
+                @png {
+                        path *.png
+                }
+                header @png Content-Type image/png
+
+                @jpg {
+                        path *.jpg
+                }
+                header @jpg Content-Type image/jpg
+        
         file_server
         }
 
+        import cors https://eddyizm.com
         reverse_proxy http://localhost:8000
         import boilerplate
-        tls eddyizm@gmail.com
+        tls tls@eddyizm.com
+
+        header Access-Control-Allow-Credentials true
 }
 
 www.eddyizm.com {
