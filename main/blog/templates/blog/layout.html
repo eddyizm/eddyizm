@@ -17,6 +17,7 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'blog/assets/css/main.css' %}" />
 		<link href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" rel="stylesheet">
 		<link rel="shortcut icon" href="{% static 'blog/favicon.ico' %}"  type="image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="{% static 'blog/assets/css/toots.css' %}">
     <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 	</head>
 	<body>
@@ -121,6 +122,7 @@
 	  <script src="{% static 'blog/assets/js/main.js' %}"></script>
 	  <!-- umami analytics -->
 	  <script defer src="https://analytics.us.umami.is/script.js" data-website-id="ecd1395a-6548-4a88-a9c2-18fae92bffeb"></script>
-           
+	  <!-- mastodon feed  -->
+	  <script type="module" src="https://esm.sh/emfed@1"></script>    
 	</body>
 </html>
