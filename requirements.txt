@@ -10,7 +10,7 @@ Django==4.2.14
 django-bleach==0.6.1
 django-honeypot==1.0.3
 django-turnstile==0.1.0
-gunicorn==21.2.0
+gunicorn==22.0.0
 idna==3.6
 packaging==23.2
 pillow==10.2.0
