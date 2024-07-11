@@ -1,12 +1,12 @@
 asgiref==3.7.2
 bleach==3.3.0
 cachetools==5.3.3
-certifi==2023.11.17
+certifi==2024.7.4
 chardet==3.0.4
 charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
-Django==4.2.7
+Django==4.2.14
 django-bleach==0.6.1
 django-honeypot==1.0.3
 django-turnstile==0.1.0
@@ -19,7 +19,7 @@ python-dotenv==1.0.0
 pytz==2017.3
 requests==2.31.0
 six==1.15.0
-sqlparse==0.4.4
+sqlparse==0.5.0
 tzdata==2024.1
 urllib3==2.1.0
 webencodings==0.5.1
