@@ -1,0 +1,119 @@
+.toots {
+  max-width: 400px;
+  list-style: none;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+}
+
+.toot {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+}
+
+/* Posting user. */
+.toot .user {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+  height: 46px;  /* Avatar height. */
+  column-gap: 0.5rem;
+
+  text-decoration: none;
+  color: inherit;
+}
+
+.toot .avatar {
+  border-radius: 4px;
+}
+
+.toot .display-name {
+  padding-top: 1em;
+  font-weight: bold;
+  font-size: 1em;
+  display: block;
+}
+
+/* .toot .user:hover .display-name {
+  text-decoration: underline;
+} */
+
+.toot .username {
+  display: block;
+  font-size: 0.75rem;
+  color: #2a1092;
+  visibility: hidden;
+}
+
+/* Boosting user is smaller and above the posting user. */
+.toot .boost {
+  height: 23px;
+  margin-bottom: 0.25rem;
+  column-gap: 0.25rem;
+}
+
+.toot .boost:before {
+  content: "♺";
+  font-size: 140%;
+}
+
+.toot .boost .username {
+  display: none;
+}
+
+.toot .permalink {
+  font-size: 0.75rem; 
+  text-decoration: none;
+  display: block;
+  color: #999;
+  float: right;
+}
+
+.toot .permalink:hover {
+  text-decoration: underline;
+}
+
+.toot .body {
+  clear: both;
+  margin-top: 1em;
+  font-size: 1rem;
+  max-height: 300px;
+  display: -webkit-box;
+  /* display 5 lines only */
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  line-clamp: 5;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+}
+
+.toot .body a {
+  overflow-wrap: anywhere;
+}
+
+/* Weird trick to keep the text in the page but not display it. */
+.toot .body .invisible {
+  display: inline-block;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.toot .body .ellipsis::after {
+  content: "…";
+}
+
+.toot .attachment {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+}
+
+.toot .attachment img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
