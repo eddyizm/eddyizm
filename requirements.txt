@@ -6,7 +6,7 @@ chardet==3.0.4
 charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
-Django==4.2.16
+Django==4.2.18
 django-bleach==0.6.1
 django-honeypot==1.0.3
 django-turnstile==0.1.0
