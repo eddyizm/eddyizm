@@ -35,6 +35,10 @@ eddyizm.com {
                 }
         }
                 
+        handle /mkey {
+            redir https://soundcloud.com/eddyizm/sets/mkey temporary
+        }
+
         handle_path /static/* {
         root * /home/eddyizm/static/
         file_server
