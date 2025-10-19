@@ -31,7 +31,7 @@ build and run
 `podman build -t eddyizm_blog -f ContainerFile --ignorefile .dockerignore`
 
 ```  
-podman run --name=blog -d -p 8000:8000 -v /home/eddyizm/data:/data:rw -v /home/eddyizm/static:/static:rw -v /home/eddyizm/media:/media:rw --restart unless-stopped localhost/eddyizm_blog
+podman run --name=blog -d -p 8000:8000 -v ~/src/eddyizm/data:/data:rw -v ~/src/eddyizm/static:/static:rw -v ~/src/eddyizm/media:/media:rw localhost/eddyizm_blog
 ```
        
 
