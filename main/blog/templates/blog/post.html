@@ -2,81 +2,83 @@
 
 {% block content %}
 <!-- Content -->
-      <div id="content-wrapper">
-        <div id="content">
-          <div class="container">
+<div id="content-wrapper">
+    <div id="content">
+        <div class="container">
             <div class="row">
-              <div class="9u 12u(mobile)">
-              <!-- Main Content -->
-                <section>
-                  <header>
-                      {% if not hide_thumb and post.image %}
-                          <img src="{{ media_url }}{{ post.image.url }}" class="feature-image" alt="{{post.title}}"/>
-                      {% endif %}
-                      <h2>{{ post.title }}</h2>
-                      <h3> <span>by </span> {{ post.author.name }}</h3>
-                      <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
-                  </header>
-                  <p> {{ post.body| safe }} </p>
-                    <div>
-                      Categories:&nbsp;
-                      {% for category in post.categories.all %}
-                      <a href="/blog/c/{{ category.name }}/">
-                          {{ category.name }}
-                      </a>&nbsp;
-                      {% endfor %}
-                     </div>
-                    <div>
-                      <div id="disqus_thread"></div>
-                      <script>
+                <div class="9u 12u(mobile)">
+                    <!-- Main Content -->
+                    <article>
+                        <header>
+                            {% if not hide_thumb and post.image %}
+                            <img src="{{ media_url }}{{ post.image.url }}" class="feature-image" alt="{{post.title}}" />
+                            {% endif %}
+                            <h2>{{ post.title }}</h2>
+                            <h3> <span>by </span> {{ post.author.name }}</h3>
+                            <h4> <span>on {{ post.date|date:"F jS o" }} </span></h4>
+                        </header>
+                        <p> {{ post.body| safe }} </p>
+                        <div>
+                            Categories:&nbsp;
+                            {% for category in post.categories.all %}
+                            <a href="/blog/c/{{ category.name }}/">
+                                {{ category.name }}
+                            </a>&nbsp;
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <div id="disqus_thread"></div>
+                            <script>
 
-                          var disqus_config = function () {
-                              this.page.url = 'https://eddyizm.com/blog/{{ post.id }}-{{ post.slug }}/';
-                              this.page.identifier ='/{{ post.id }}-{{ post.slug }}/' ;
-                          };
+                                var disqus_config = function () {
+                                    this.page.url = 'https://eddyizm.com/blog/{{ post.id }}-{{ post.slug }}/';
+                                    this.page.identifier = '/{{ post.id }}-{{ post.slug }}/';
+                                };
 
-                          (function() {  // DON'T EDIT BELOW THIS LINE
-                              var d = document, s = d.createElement('script');
+                                (function () {  // DON'T EDIT BELOW THIS LINE
+                                    var d = document, s = d.createElement('script');
 
-                              s.src = 'https://eddyizm.disqus.com/embed.js';
+                                    s.src = 'https://eddyizm.disqus.com/embed.js';
 
-                              s.setAttribute('data-timestamp', +new Date());
-                              (d.head || d.body).appendChild(s);
-                          })();
-                      </script>
-                      <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-                    </div>
-                </section>
-               </div>
-              <div class="3u 12u(mobile)">
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript"
+                                    rel="nofollow">comments powered by Disqus.</a></noscript>
+                        </div>
+                    </article>
+                </div>
+                <div class="3u 12u(mobile)">
 
-                <!-- Sidebar -->
-                {% include 'blog/support.html' %}
-                <section>
-                    <header>
-                      <h2>Recent Posts</h2>
-                    </header>
-                    <ul class="link-list">
-                      {% for blog_post in posts %}
-                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
-                      {% endfor %}
-                      </ul>
-                 </section>
-                 <section>
-                  <header>
-                    <h2>Categories</h2>
-                  </header>
-                  <ul class="link-list">
-                    {% for cat in categories %}
-                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
-                    {% endfor %}
-                    </ul>
-               </section>
-               {% include 'blog/mastodon.html' %}
-              </div>
+                    <!-- Sidebar -->
+                    {% include 'blog/support.html' %}
+                    <article>
+                        <header>
+                            <h2>Recent Posts</h2>
+                        </header>
+                        <ul class="link-list">
+                            {% for blog_post in posts %}
+                            <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                    <article>
+                        <header>
+                            <h2>Categories</h2>
+                        </header>
+                        <ul class="link-list">
+                            {% for cat in categories %}
+                            <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
+                            {% endfor %}
+                        </ul>
+                    </article>
+                    {% include 'blog/mastodon.html' %}
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-      {% endblock %}
+</div>
+</div>
+{% endblock %}
