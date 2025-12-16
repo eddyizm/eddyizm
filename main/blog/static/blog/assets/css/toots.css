@@ -1,125 +1,28 @@
-.toots {
-  max-width: 400px;
-  list-style: none;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, helvetica, Cantarell, Ubuntu, roboto, noto, arial, sans-serif;
+/* Custom CSS to enforce Flexbox behavior for the main content layout (75/25 split) */
+main .grid {
+    display: flex;
+    gap: var(--pico-spacing);
+    align-items: flex-start;
 }
 
-.toot {
-  border-bottom: 1px solid #ccc;
-  padding: 1rem;
+main .grid>div:first-child {
+
+    width: 75%;
+    flex-shrink: 0;
 }
 
-/* Posting user. */
-.toot .user {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: space-evenly;
-  align-content: flex-start;
-  height: 46px;  /* Avatar height. */
-  column-gap: 0.5rem;
-
-  text-decoration: none;
-  color: inherit;
+main .grid>aside.sidebar {
+    width: 25%;
+    flex-shrink: 0;
 }
 
-.toot .avatar {
-  border-radius: 4px;
-}
+@media (max-width: 991px) {
+    main .grid {
+        flex-direction: column;
+    }
 
-.toot .display-name {
-  padding-top: 1em;
-  font-weight: bold;
-  font-size: 1em;
-  display: block;
-}
-
-/* .toot .user:hover .display-name {
-  text-decoration: underline;
-} */
-
-.toot .username {
-  display: block;
-  font-size: 0.75rem;
-  color: #2a1092;
-  visibility: hidden;
-}
-
-/* Boosting user is smaller and above the posting user. */
-.toot .boost {
-  margin-bottom: 0.25rem;
-  column-gap: 0.25rem;
-  /* display 2 lines only */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  line-clamp: 2;
-  text-overflow: ellipsis;
-  overflow: hidden; 
-}
-
-.toot .boost:before {
-  content: "♺";
-  font-size: 140%;
-}
-
-.toot .boost .username {
-  display: none;
-}
-
-.toot .permalink {
-  font-size: 0.75rem; 
-  text-decoration: none;
-  display: block;
-  color: #999;
-  float: right;
-}
-
-.toot .permalink:hover {
-  text-decoration: underline;
-}
-
-.toot .body {
-  clear: both;
-  margin-top: 1em;
-  font-size: 1rem;
-  max-height: 300px;
-  display: -webkit-box;
-  /* display 5 lines only */
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-  line-clamp: 5;
-  text-overflow: ellipsis;
-  overflow: hidden; 
-}
-
-.toot .body a {
-  overflow-wrap: anywhere;
-}
-
-/* Weird trick to keep the text in the page but not display it. */
-.toot .body .invisible {
-  display: inline-block;
-  font-size: 0;
-  line-height: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
-
-.toot .body .ellipsis::after {
-  content: "…";
-}
-
-.toot .attachment {
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  border-radius: 4px;
-}
-
-.toot .attachment img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    main .grid>div:first-child,
+    main .grid>aside.sidebar {
+        width: 100%;
+    }
 }
