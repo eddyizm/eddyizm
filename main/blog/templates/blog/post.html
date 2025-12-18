@@ -37,7 +37,7 @@
         <hr>
 
         <section>
-            <h3>Comments</h3>
+            <h4>Comments</h4>
             <div id="disqus_thread"></div>
             <script>
                 var disqus_config = function () {
@@ -64,7 +64,7 @@
         </section>
 
         <section>
-            <h3>Recent Posts</h3>
+            <h4>Recent Posts</h4>
             <ul role="list">
                 {% for blog_post in posts %}
                 <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
@@ -73,7 +73,7 @@
         </section>
 
         <section>
-            <h3>Categories</h3>
+            <h4>Categories</h4>
             <ul role="list">
                 {% for cat in categories %}
                 <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>

@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.fuchsia.min.css" />
 
     <link href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" rel="stylesheet">
 
@@ -22,13 +22,28 @@
         <header class="container">
             <nav>
                 <ul>
-                    <li><a href="{% url 'blog' %}" class="contrast"><strong>eddyizm</strong></a></li>
+                    <li>
+                        <a href="{% url 'blog' %}" class="contrast logo-link">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="lotus-logo">
+
+                                <path class="petal"
+                                    d="M50 85 C30 85 10 70 10 50 C10 35 30 45 50 55 C70 45 90 35 90 50 C90 70 70 85 50 85 Z" />
+                                <path class="petal" d="M45 55 C15 55 5 35 15 15 C30 5 45 35 45 55 Z" />
+                                <path class="petal" d="M55 55 C85 55 95 35 85 15 C70 5 55 35 55 55 Z" />
+                                <path class="petal petal-inner" d="M50 60 C35 60 25 30 50 5 C75 30 65 60 50 60 Z" />
+                                <path class="petal-inner" style="opacity: 0.8; stroke: #fff;"
+                                    d="M50 70 C40 70 35 55 50 45 C65 55 60 70 50 70 Z" />
+                                <circle class="lotus-center" cx="50" cy="55" r="4" />
+                            </svg>
+                            <h2>eddyizm.com</h2>
+                        </a>
+                    </li>
                 </ul>
                 <ul>
-                    <li><a href="{% url 'blog_posts' %}">Blog</a></li>
-                    <li><a href="{% url 'software' %}">Software</a></li>
-                    <li><a href="{% url 'projects' %}">Projects</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
+                    <li><a href="{% url 'blog_posts' %}" role="button">Blog</a></li>
+                    <li><a href="{% url 'software' %}" role="button">Software</a></li>
+                    <li><a href="{% url 'projects' %}" role="button">Projects</a></li>
+                    <li><a href="{% url 'about' %}" role="button">About</a></li>
                 </ul>
             </nav>
         </header>
@@ -42,7 +57,7 @@
             <hr>
             <div class="grid">
                 <section style="--pico-cols: 8;">
-                    <h2>Stay in Touch</h2>
+                    <h4>Stay in Touch</h4>
                     <div class="grid">
                         <ul style="list-style: none; padding: 0; --pico-cols: 6;">
                             <li>
@@ -63,18 +78,18 @@
                     </div>
                 </section>
                 <section style="--pico-cols: 4;">
-                    <h2>Quote Blurb</h2>
-                    <figure>
-                        <blockquote cite="eddyizm.com">
-                            Bad news is: you cannot make people like, love, understand, validate, accept or be nice to
-                            you. You can't control them either. Good news is: it doesn't matter.
-                        </blockquote>
-                    </figure>
+                    <h>Quote Blurb</h3>
+                        <figure>
+                            <blockquote cite="eddyizm.com">
+                                Bad news is: you cannot make people like, love, understand, validate, accept or be nice
+                                to
+                                you. You can't control them either. Good news is: it doesn't matter.
+                            </blockquote>
+                        </figure>
                 </section>
             </div>
             <small id="copyright">
                 2018-{{year}} &copy; eddyizm.com All rights reserved.
-                UP</a> (original template) now using <a href="https://picocss.com">Pico.css</a>
             </small>
         </footer>
 
