@@ -107,7 +107,7 @@ def blog_category(request, category):
     response["Cache-Control"] = "public, max-age=600"
     return response
 
-# search blog posts
+
 def search_blogposts(request):
     if request.method == 'GET':
         query = request.GET.get('q')
