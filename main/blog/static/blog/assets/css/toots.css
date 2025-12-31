@@ -1,3 +1,19 @@
+.main-header {
+    background-color: var(--pico-card-background-color);
+    border-bottom: 1px solid var(--pico-muted-border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* --- 2. Logo Styling --- */
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
 /* Styling to align the logo and text within the nav link */
 .logo-link {
     display: flex;
@@ -15,10 +31,9 @@
 
 .logo-link h2 {
     margin-bottom: 0;
-    /* Align with SVG */
+
 }
 
-/* --- Updated Lotus SVG Styling --- */
 .lotus-logo {
     width: 44px;
     height: 44px;
@@ -28,7 +43,6 @@
     overflow: visible;
 }
 
-/* Organic Petal Shapes */
 .lotus-logo .petal {
     fill: #ff9100;
     stroke: #ffcc00;
@@ -37,7 +51,7 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Center layers for depth */
+
 .lotus-logo .petal-inner {
     fill: #ffc400;
     stroke: #ffea00;
@@ -48,7 +62,6 @@
     filter: drop-shadow(0 0 2px rgba(255, 102, 0, 0.8));
 }
 
-/* Hover effect to "bloom" the flower */
 .logo-link:hover .lotus-logo .petal {
     fill: #ffa500;
     filter: brightness(1.1);
@@ -94,4 +107,38 @@ main .grid>aside.sidebar {
     main .grid>aside.sidebar {
         width: 100%;
     }
+}
+
+.mobile-menu {
+    display: none;
+}
+
+@media (max-width: 991px) {
+
+    .desktop-menu {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .logo-link h2 {
+        font-size: 1rem;
+    }
+}
+
+[role="listbox"] li {
+    padding: 0.5rem 1rem;
+}
+
+[role="listbox"] li a {
+    color: var(--pico-color);
+    text-decoration: none;
+    display: block;
+    width: 100%;
+}
+
+details.dropdown summary {
+    min-width: 100px;
 }

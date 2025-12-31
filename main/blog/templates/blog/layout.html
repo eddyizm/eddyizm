@@ -24,8 +24,8 @@
                 <ul>
                     <li>
                         <a href="{% url 'blog' %}" class="contrast logo-link">
-                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="lotus-logo">
-
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="lotus-logo"
+                                style="height: 40px; width: 40px;">
                                 <path class="petal"
                                     d="M50 85 C30 85 10 70 10 50 C10 35 30 45 50 55 C70 45 90 35 90 50 C90 70 70 85 50 85 Z" />
                                 <path class="petal" d="M45 55 C15 55 5 35 15 15 C30 5 45 35 45 55 Z" />
@@ -35,15 +35,30 @@
                                     d="M50 70 C40 70 35 55 50 45 C65 55 60 70 50 70 Z" />
                                 <circle class="lotus-center" cx="50" cy="55" r="4" />
                             </svg>
-                            <h2>eddyizm.com</h2>
+                            <h2 class="logo-text">eddyizm.com</h2>
                         </a>
                     </li>
                 </ul>
-                <ul>
+
+                <ul class="desktop-menu">
                     <li><a href="{% url 'blog_posts' %}" role="button">Blog</a></li>
                     <li><a href="{% url 'software' %}" role="button">Software</a></li>
                     <li><a href="{% url 'projects' %}" role="button">Projects</a></li>
                     <li><a href="{% url 'about' %}" role="button">About</a></li>
+                </ul>
+
+                <ul class="mobile-menu">
+                    <li>
+                        <details class="dropdown">
+                            <summary aria-haspopup="listbox" role="button" class="outline">Menu</summary>
+                            <ul role="listbox">
+                                <li><a href="{% url 'blog_posts' %}">Blog</a></li>
+                                <li><a href="{% url 'software' %}">Software</a></li>
+                                <li><a href="{% url 'projects' %}">Projects</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                            </ul>
+                        </details>
+                    </li>
                 </ul>
             </nav>
         </header>
