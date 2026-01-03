@@ -6,13 +6,6 @@
     z-index: 1000;
 }
 
-/* --- 2. Logo Styling --- */
-.logo-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-}
 
 /* Styling to align the logo and text within the nav link */
 .logo-link {
