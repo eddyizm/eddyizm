@@ -1,75 +1,21 @@
-<!DOCTYPE html>
-<!--
-	Halcyonic by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-    <head>
-        <title>eddyizm.com</title>
-        
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <!--[if lte IE 8
-            ]><script src="assets/js/ie/html5shiv.js"></script
-        ><![endif]-->
-        <link
-            rel="stylesheet"
-            type="text/css"
-            href="https://eddyizm.com/static/blog/assets/css/main.css"
-        />
-        <link
-            href="https://use.fontawesome.com/releases/v5.0.6/css/all.css"
-            rel="stylesheet"
-        />
-        <link
-            rel="shortcut icon"
-            href="https://eddyizm.com/static/blog/favicon.ico"
-            type="image/x-icon"
-        />
-        <!--[if lte IE 9
-            ]><link rel="stylesheet" href="assets/css/ie9.css"
-        /><![endif]-->
-    </head>
-    <body>
-        <div id="page-wrapper">
-            <!-- Header -->
-            <div id="header-wrapper" style="min-height: 5em;">
-                <header id="header" class="container">
-                    <div class="row">
-                        <div class="12u">
-                            <!-- Logo -->
-                            <h1>
-                                <a href="{% url 'blog' %}" id="logo">eddyizm</a>
-                            </h1>
-                        </div>
-                    </div>
-                </header>
-            </div>
-            
-            
-                <div style="text-align:center;" class="container">
-                        <div class="row">
-                            <div class="12u">
-                                <section>
-                                    <h1>The cats can haz 500!</h1>
-                                    <a href="https://eddyizm.com" ><img 
-                                        style="max-width:750px; width: 100%; height: 100%;"
-                                        src="https://http.cat/500.jpg" alt="Ooopsy!" /></a>
-                                    <p>Sorry Bob</p>
-                                    
-                                </section>
-                        </div>
-            
-                </div>
-            </div>
+{% extends "blog/layout.html" %}
 
- 
-        </div>
+{% block content %}
+<div class="container" style="text-align: center; max-width: 800px;">
+    <article>
+        <hgroup>
+            <h1>The cats can haz 500!</h1>
+            <p>Sorry Bob, something broke on our end.</p>
+        </hgroup>
 
-    <!-- umami analytics -->
-	  <script defer src="https://analytics.us.umami.is/script.js" data-website-id="ecd1395a-6548-4a88-a9c2-18fae92bffeb"></script>
-    </body>
-</html>
+        <a href="{% url 'blog' %}">
+            <img src="https://http.cat/500.jpg" alt="500 server error"
+                style="border-radius: var(--pico-border-radius); width: 100%; height: auto; max-width: 600px;">
+        </a>
 
-
+        <footer>
+            <a href="{% url 'blog' %}" role="button" class="secondary">Back to Safety</a>
+        </footer>
+    </article>
+</div>
+{% endblock %}
