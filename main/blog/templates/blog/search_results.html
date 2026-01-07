@@ -1,62 +1,68 @@
 {% extends "blog/layout.html" %}
 {% load bleach_tags %}
+
 {% block content %}
-      <div id="content-wrapper">
-        <div id="content">
-          <div class="container">
-            <div class="row">
-              <div class="9u 12u(mobile)">
-
-          <section>
+<div class="grid">
+    <div style="--pico-cols: 9;">
+        <section>
             {% if records == 0 %}
-            <header><h2>No records found for: {{ q }}</h2> 
-              <h4>Try again Bob?</h4>  
-            </header>
-              {% else %}
-              <header><h2>Search Results for: {{ q }}</h2> 
-              <h4>{{ records }} results.</h4></header>
-              <!-- results  -->
-              {% for blog_posts in posts %}
-              <span><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a>
-              on {{ blog_posts.date|date:"F jS o" }} by {{ blog_posts.author.name }} : {{ blog_posts.body|slice:":100"|bleach }} . . .</span>
-              <br>
-              {% endfor %}
+            <hgroup>
+                <h2>No records found for: "{{ q }}"</h2>
+                <p>Try a different search term?</p>
+            </hgroup>
+            {% else %}
+            <hgroup>
+                <h2>Search Results for: "{{ q }}"</h2>
+                <p>{{ records }} result{{ records|pluralize }} found.</p>
+            </hgroup>
+
+            {% for blog_post in posts %}
+            <article>
+                <header>
+                    <h4 style="margin-bottom: 0;">
+                        <a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }}</a>
+                    </h4>
+                    <small>
+                        on {{ blog_post.date|date:"F jS o" }} by {{ blog_post.author.name }}
+                    </small>
+                </header>
+                <p>
+                    {{ blog_post.body|slice:":150"|bleach }} . . .
+                </p>
+                <footer>
+                    <a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/" class="secondary"
+                        style="font-size: 0.8rem;">Read full post</a>
+                </footer>
+            </article>
+            {% endfor %}
             {% endif %}
-          </section>
-          
-          </div>
-              <div class="3u 12u(mobile)">
-
-                <!-- Sidebar -->
-                {% include 'blog/support.html' %}
-                <section>
-                    <header>
-                      <h2>Recent Posts</h2>
-                    </header>
-                    <ul class="link-list">
-                      {% for blog_post in recent_posts %}
-                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
-                      {% endfor %}
-                      </ul>
-                 </section>
-                 <section>
-                  <header>
-                    <h2>Categories</h2>
-                  </header>
-                  <ul class="link-list">
-                    {% for cat in categories %}
-                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
-                    {% endfor %}
-                    </ul>
-               </section>
-               {% include 'blog/mastodon.html' %}
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        </section>
     </div>
+
+    <aside class="sidebar" style="--pico-cols: 3;">
+        <section>
+            {% include 'blog/support.html' %}
+        </section>
+
+        <section>
+            <h3>Recent Posts</h3>
+            <ul role="list">
+                {% for blog_post in recent_posts %}
+                <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h3>Categories</h3>
+            <ul role="list">
+                {% for cat in categories %}
+                <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        {% include 'blog/mastodon.html' %}
+    </aside>
+</div>
 {% endblock %}
-
-

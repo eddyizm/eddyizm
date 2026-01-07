@@ -1,83 +1,94 @@
 {% extends "blog/layout.html" %}
 {% load bleach_tags %}
+
 {% block content %}
-      <div id="content-wrapper">
-        <div id="content">
-          <div class="container">
-            <div class="row">
-              <div class="9u 12u(mobile)">
+<div class="grid">
+    <div style="--pico-cols: 9;">
 
-          
-          <section>
-            <header><h2>{{ category }}</h2> </header>
-          </section>
-          <!-- Main Content -->
-          {% for blog_posts in page_obj %}
-          <section>
+        <hgroup>
+            <h1>Category: {{ category }}</h1>
+            <p>Showing posts filed under {{ category }}</p>
+        </hgroup>
+
+        {% for blog_post in page_obj %}
+        <article>
             <header>
-                <!-- featured image --> 
-                {% if blog_posts.image %}
-                    <img src="{{ blog_posts.image.url }}" class="feature-image" alt="{{blog_posts.title}}"/>
+                {% if blog_post.image %}
+                <img src="{{ blog_post.image.url }}" alt="{{ blog_post.title }}"
+                    style="width: 100%; height: auto; border-radius: var(--pico-border-radius);" />
                 {% endif %}
-                <h2><a href="/blog/{{ blog_posts.id }}-{{ blog_posts.slug }}/">{{ blog_posts.title }} </a></h2>
-                <h3> <span>by </span> {{ blog_posts.author.name }}</h3>
-                <h4> <span>on {{ blog_posts.date|date:"F jS o" }} </span></h4>
+
+                <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }}</a></h2>
+
+                <small>
+                    <span>by </span> {{ blog_post.author.name }} |
+                    <span>on {{ blog_post.date|date:"F jS o" }}</span>
+                </small>
             </header>
-                <p> {{ blog_posts.body|slice:":200"|bleach }} . . . </p>
-          </section>
-          {% endfor %}
-          <section>
-            <h2 class="pagination">
-              <span class="step-links">
-                  {% if page_obj.has_previous %}
-                      <a href="?page=1">&laquo; first</a>
-                      <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                  {% endif %}
 
-                  <span class="current">
-                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                  </span>
+            <p>{{ blog_post.body|slice:":200"|bleach }} . . . </p>
 
-                  {% if page_obj.has_next %}
-                      <a href="?page={{ page_obj.next_page_number }}">next</a>
-                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                  {% endif %}
-              </span>
-            </h2>
-          </section>
-              </div>
-              <div class="3u 12u(mobile)">
+            <footer>
+                <a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/" role="button" class="secondary">Read More</a>
+            </footer>
+        </article>
+        {% endfor %}
 
-                <!-- Sidebar -->
-                {% include 'blog/support.html' %}
-                <section>
-                    <header>
-                      <h2>Recent Posts</h2>
-                    </header>
-                    <ul class="link-list">
-                      {% for blog_post in recent_posts %}
-                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
-                      {% endfor %}
-                      </ul>
-                 </section>
-                 <section>
-                  <header>
-                    <h2>Categories</h2>
-                  </header>
-                  <ul class="link-list">
-                    {% for cat in categories %}
-                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
-                    {% endfor %}
-                    </ul>
-               </section>
-               {% include 'blog/mastodon.html' %}
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+        {% if page_obj.paginator.num_pages > 1 %}
+        <nav aria-label="pagination">
+            <ul>
+                <li>
+                    {% if page_obj.has_previous %}
+                    <a href="?page=1" role="button" class="outline secondary">First</a>
+                    <a href="?page={{ page_obj.previous_page_number }}" role="button" class="outline secondary">Prev</a>
+                    {% else %}
+                    <button class="outline secondary" disabled>Prev</button>
+                    {% endif %}
+                </li>
+            </ul>
+            <ul>
+                <li><small>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</small></li>
+            </ul>
+            <ul>
+                <li>
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" role="button" class="outline secondary">Next</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" role="button" class="outline secondary">Last</a>
+                    {% else %}
+                    <button class="outline secondary" disabled>Next</button>
+                    {% endif %}
+                </li>
+            </ul>
+        </nav>
+        {% endif %}
     </div>
+
+    <aside class="sidebar" style="--pico-cols: 3;">
+        <section>
+            {% include 'blog/support.html' %}
+        </section>
+
+        <section>
+            <h3>Recent Posts</h3>
+            <ul role="list">
+                {% for blog_post in recent_posts %}
+                <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h3>Categories</h3>
+            <ul role="list">
+                {% for cat in categories %}
+                <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            {% include 'blog/mastodon.html' %}
+        </section>
+    </aside>
+</div>
 {% endblock %}
-
-

@@ -1,128 +1,116 @@
-<!DOCTYPE HTML>
-<!--
-	Halcyonic by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>eddyizm.com</title>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <title>eddyizm.com</title>
     {% load static %}
     <meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<!-- <meta property="og:url" content="">
-		<meta property="og:title" content="">
-		<meta property="og:description" content=""> -->
-		<link rel="stylesheet" type="text/css" href="{% static 'blog/assets/css/main.css' %}" />
-		<link href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" rel="stylesheet">
-		<link rel="shortcut icon" href="{% static 'blog/favicon.ico' %}"  type="image/x-icon" />
-		<link rel="stylesheet" type="text/css" href="{% static 'blog/assets/css/toots.css' %}">
-    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-	</head>
-	<body>
-		<div id="page-wrapper">
-			<!-- Header -->
-				<div id="header-wrapper">
-					<header id="header" class="container">
-						<div class="row">
-							<div class="12u">
-								<!-- Logo -->
-									<h1><a href="{% url 'blog' %}" id="logo">eddyizm</a></h1>
-								<!-- Nav -->
-									<nav id="nav">
-										<a href="{% url 'blog_posts' %}">Blog</a>
-										<a href="{% url 'software' %}">Software</a>
-										<a href="{% url 'projects' %}">Projects</a>
-										<a href="{% url 'about' %}">About</a>
-									</nav>
-							</div>
-						</div>
-					</header>
-			</div>
-		<!-- Content -->
-			<!-- <div id="content-wrapper"> -->
-				{% block content %}
-				{% endblock %}	
-			<!-- </div> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-			<!-- Footer -->
-				<div id="footer-wrapper">
-					<footer id="footer" class="container">
-						<div class="row">
-							<div class="8u 12u(mobile)">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.fuchsia.min.css" />
 
-								<!-- Links -->
-									<section>
-										<h2>Stay in Touch</h2>
-										<div>
-											<div class="row">
-												<div class="4u 12u(mobile)">
-													<ul class="link-list last-child">
-														<li><a href="https://discord.com"><i class="fab fa-discord fa-2x"></i></a>
-														<a href="https://fosstodon.org/@eddyizm"><i class="fab fa-mastodon fa-2x"></i></a>
-														<a href="https://github.com/eddyizm"><i class="fab fa-github fa-2x"></i></a>
-														</li>
-													</ul>
-												</div>
-												<div class="3u 12u(mobile)">
-													<ul class="link-list last-child">
-														<li><a href='https://ko-fi.com/L3L01HI5A' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></li>
-													    <li>bitcoin: 3QVHSSCJvn6yXEcJ3A3cxYLMmbvFsrnUs5</li>
-													</ul>
-												</div> 
-												<!-- <div class="3u 12u(mobile)">
-													<ul class="link-list last-child">
-														<li><a href="#">Neque amet dapibus</a></li>
-														<li><a href="#">Sed mattis quis rutrum</a></li>
-														<li><a href="#">Accumsan suspendisse</a></li>
-														<li><a href="#">Eu varius vitae magna</a></li>
-													</ul>
-												</div> -->
-												<!-- <div class="3u 12u(mobile)">
-													<ul class="link-list last-child">
-														
-														<li><a href="#">Sed mattis quis rutrum</a></li>
-														<li><a href="#">Accumsan suspendisse</a></li>
-														<li><a href="#">Eu varius vitae magna</a></li>
-													</ul>
-												</div> -->
-											</div>
-										</div>
-									</section>
+    <link rel="shortcut icon" href="{% static 'blog/favicon.ico' %}" type="image/x-icon" />
 
-							</div>
-							<div class="4u 12u(mobile)">
-								<!-- Blurb -->
-									<section>
-										<h2>Quote Blurb</h2>
-										<p>Bad news is: you cannot make people like, love, understand, validate, accept or be nice to you. You can't control them either.
-												Good news is: it doesn't matter.
-										</p>
-										</section>
-							</div>
-						</div>
-					</footer>
-				</div>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/assets/css/toots.css' %}">
+</head>
 
-			<!-- Copyright -->
-				<div id="copyright">
-					2018-{{year}} &copy;  eddyizm.com All rights reserved. | design: <a href="http://html5up.net">HTML5 UP</a>
-				</div>
+<body>
+    <div class="container">
 
-		</div>
+        <header class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="{% url 'blog' %}" class="contrast logo-link">
+                            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="lotus-logo"
+                                style="height: 40px; width: 40px;">
+                                <path class="petal"
+                                    d="M50 85 C30 85 10 70 10 50 C10 35 30 45 50 55 C70 45 90 35 90 50 C90 70 70 85 50 85 Z" />
+                                <path class="petal" d="M45 55 C15 55 5 35 15 15 C30 5 45 35 45 55 Z" />
+                                <path class="petal" d="M55 55 C85 55 95 35 85 15 C70 5 55 35 55 55 Z" />
+                                <path class="petal petal-inner" d="M50 60 C35 60 25 30 50 5 C75 30 65 60 50 60 Z" />
+                                <path class="petal-inner" style="opacity: 0.8; stroke: #fff;"
+                                    d="M50 70 C40 70 35 55 50 45 C65 55 60 70 50 70 Z" />
+                                <circle class="lotus-center" cx="50" cy="55" r="4" />
+                            </svg>
+                            <h2 class="logo-text">eddyizm.com</h2>
+                        </a>
+                    </li>
+                </ul>
 
-		<!-- Scripts -->
-      <script src="{% static 'blog/assets/js/jquery.min.js' %}"></script>  
-      <script src="{% static 'blog/assets/js/skel.min.js' %}"></script>  
-      <script src="{% static 'blog/assets/js/skel-viewport.min.js' %}"></script>  
-      <script src="{% static 'blog/assets/js/util.js' %}"></script>  
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	  <script src="{% static 'blog/assets/js/music.js' %}"></script> 
-	  <script src="{% static 'blog/assets/js/main.js' %}"></script>
-	  <!-- umami analytics -->
-	  <script defer src="https://analytics.us.umami.is/script.js" data-website-id="ecd1395a-6548-4a88-a9c2-18fae92bffeb"></script>
-	  <!-- mastodon feed  -->
-	  <script type="module" src="https://esm.sh/emfed@1"></script>    
-	</body>
+                <ul class="desktop-menu">
+                    <li><a href="{% url 'blog_posts' %}" role="button">Blog</a></li>
+                    <li><a href="{% url 'software' %}" role="button">Software</a></li>
+                    <li><a href="{% url 'projects' %}" role="button">Projects</a></li>
+                    <li><a href="{% url 'about' %}" role="button">About</a></li>
+                </ul>
+
+                <ul class="mobile-menu">
+                    <li>
+                        <details class="dropdown">
+                            <summary aria-haspopup="listbox" role="button" class="outline">Menu</summary>
+                            <ul role="listbox">
+                                <li><a href="{% url 'blog_posts' %}">Blog</a></li>
+                                <li><a href="{% url 'software' %}">Software</a></li>
+                                <li><a href="{% url 'projects' %}">Projects</a></li>
+                                <li><a href="{% url 'about' %}">About</a></li>
+                            </ul>
+                        </details>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+
+        <footer class="container">
+            <hr>
+            <div class="grid">
+                <section style="--pico-cols: 8;">
+                    <h4>Stay in Touch</h4>
+                    <div class="grid">
+                        <ul style="list-style: none; padding: 0; --pico-cols: 6;">
+                            <li>
+                                <a href="https://discord.com"><i class="fab fa-discord fa-2x"></i></a>
+                                <a href="https://fosstodon.org/@eddyizm"><i class="fab fa-mastodon fa-2x"></i></a>
+                                <a href="https://github.com/eddyizm"><i class="fab fa-github fa-2x"></i></a>
+                            </li>
+                        </ul>
+                        <ul style="list-style: none; padding: 0; --pico-cols: 6;">
+                            <li>
+                                <a href='https://ko-fi.com/L3L01HI5A' target='_blank'><img height='36'
+                                        style='border:0px;height:36px;'
+                                        src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=2' border='0'
+                                        alt='Buy Me a Coffee at ko-fi.com' /></a>
+                            </li>
+                            <li><small>bitcoin: 3QVHSSCJvn6yXEcJ3A3cxYLMmbvFsrnUs5</small></li>
+                        </ul>
+                    </div>
+                </section>
+                <section style="--pico-cols: 4;">
+                    <h>Quote Blurb</h3>
+                        <figure>
+                            <blockquote cite="eddyizm.com">
+                                Bad news is: you cannot make people like, love, understand, validate, accept or be nice
+                                to
+                                you. You can't control them either. Good news is: it doesn't matter.
+                            </blockquote>
+                        </figure>
+                </section>
+            </div>
+            <small id="copyright">
+                2018-{{year}} &copy; eddyizm.com All rights reserved.
+            </small>
+        </footer>
+
+    </div>
+    <script src="{% static 'blog/assets/js/music.js' %}"></script>
+    <script defer src="https://analytics.us.umami.is/script.js"
+        data-website-id="ecd1395a-6548-4a88-a9c2-18fae92bffeb"></script>
+    <script type="module" src="https://esm.sh/emfed@1"></script>
+</body>
+
 </html>

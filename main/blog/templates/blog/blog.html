@@ -1,60 +1,65 @@
 {% extends "blog/layout.html" %}
 {% load bleach_tags %}
+
 {% block content %}
-      <div id="content-wrapper">
-        <div id="content">
-          <div class="container">
-            <div class="row">
-              <div class="9u 12u(mobile)">
+<div class="grid">
 
-                <!-- Main Content -->
-                {% for blog_post in posts %}
-                <section>
-                  <header>
-                    <!-- featured image --> 
-                    {% if blog_post.image %}
-                        <img src="{{ media_url }}{{ blog_post.image.url }}" class="feature-image" alt="{{post.title}}"/>
-                    {% endif %}
-                    <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }} </a></h2>
-                    <h3> <span>by </span> {{ blog_post.author.name }}</h3>
-                    <h4> <span>on {{ blog_post.date|date:"F jS o" }} </span></h4>
-                  </header>
-                      <p> {{ blog_post.body|slice:":200"|bleach }} . . . </p>
-                </section>
-                {% endfor %}
-              </div>
-              <div class="3u 12u(mobile)">
+    <div style="--pico-cols: 9;">
+        {% for blog_post in posts %}
 
-                <!-- Sidebar -->
-                {% include 'blog/support.html' %}
-                <section>
-                    <header>
-                      <h2>Recent Posts</h2>
-                    </header>
-                    <ul class="link-list">
-                      {% for blog_post in recent_posts %}
-                      <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
-                      {% endfor %}
-                      </ul>
-                 </section>
-                 <section>
-                  <header>
-                    <h2>Categories</h2>
-                  </header>
-                  <ul class="link-list">
-                    {% for cat in categories %}
-                    <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
-                    {% endfor %}
-                    </ul>
-                  </section>
-                  {% include 'blog/mastodon.html' %}
+        <article>
+            <header>
+                {% if blog_post.image %}
+                <img src="{{ media_url }}{{ blog_post.image.url }}" alt="{{ blog_post.title }}"
+                    style="width: 100%; height: auto; border-radius: var(--pico-border-radius);" />
+                {% endif %}
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <h2><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/">{{ blog_post.title }}</a></h2>
+
+                <small>
+                    <span>by </span> {{ blog_post.author.name }} |
+                    <span>on {{ blog_post.date|date:"F jS o" }}</span>
+                </small>
+            </header>
+
+            <p> {{ blog_post.body|slice:":200"|bleach }} . . . </p>
+
+            <footer>
+                <a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/" role="button" class="secondary">Read More</a>
+            </footer>
+        </article>
+        <hr>
+        {% endfor %}
     </div>
+
+    <aside class="sidebar" style="--pico-cols: 3;">
+
+        <section>
+            {% include 'blog/support.html' %}
+        </section>
+
+        <section>
+            <h4>Recent Posts</h4>
+            <ul role="list">
+                {% for blog_post in recent_posts %}
+                <li><a href="/blog/{{ blog_post.id }}-{{ blog_post.slug }}/"> {{ blog_post.title }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Categories</h4>
+            <ul role="list">
+                {% for cat in categories %}
+                <li><a href="/blog/c/{{ cat.name }}/"> {{ cat.name }} </a></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            {% include 'blog/mastodon.html' %}
+        </section>
+
+    </aside>
+</div>
 {% endblock %}
-
-
