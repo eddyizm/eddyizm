@@ -13,7 +13,7 @@ django-turnstile==0.1.0
 gunicorn==23.0.0
 idna==3.7
 packaging==23.2
-pillow==10.3.0
+pillow==12.1.1
 pyparsing==2.4.7
 python-dotenv==1.0.0
 pytz==2017.3
