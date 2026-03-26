@@ -17,7 +17,7 @@ pillow==12.1.1
 pyparsing==2.4.7
 python-dotenv==1.0.0
 pytz==2017.3
-requests==2.32.4
+requests==2.33.0
 six==1.15.0
 sqlparse==0.5.4
 tzdata==2024.1
