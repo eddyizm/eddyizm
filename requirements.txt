@@ -15,7 +15,7 @@ idna==3.7
 packaging==23.2
 pillow==12.2.0
 pyparsing==2.4.7
-python-dotenv==1.0.0
+python-dotenv==1.2.2
 pytz==2017.3
 requests==2.33.0
 six==1.15.0
