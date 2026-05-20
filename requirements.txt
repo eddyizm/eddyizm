@@ -11,7 +11,7 @@ django-bleach==0.6.1
 django-honeypot==1.0.3
 django-turnstile==0.1.0
 gunicorn==23.0.0
-idna==3.7
+idna==3.15
 packaging==23.2
 pillow==12.2.0
 pyparsing==2.4.7
