@@ -13,3 +13,5 @@ main/db.sqlite3
 .prod.env
 .dev.env
 static/
+graphify-out/
+.opencode/
