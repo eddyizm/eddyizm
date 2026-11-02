@@ -180,10 +180,10 @@
 	background-color:crimson;
 }
 .mhn-player .controls .fa-pp:before{
-	content:'\f04b';
+	content:'\25B6';
 }
 .mhn-player .controls .active .fa-pp:before{
-	content:'\f04c';
+	content:'\23F8';
 }
 .mhn-player .controls .progress{
 	height:1px;
