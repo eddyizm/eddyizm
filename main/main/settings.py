@@ -119,7 +119,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-BLEACH_ALLOWED_TAGS = ['p', 'a', 'br', 'code', 'pre', 'img', 'blockquote', 'q']
+BLEACH_ALLOWED_TAGS = ['p', 'a', 'br', 'code', 'pre', 'img', 'strong', 'blockquote', 'q']
 BLEACH_ALLOWED_ATTRIBUTES = ['href']
 
 # security headers
