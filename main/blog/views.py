@@ -3,19 +3,18 @@ from datetime import datetime
 from cachetools import TTLCache
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.core.paginator import Paginator
 from django.core.mail import BadHeaderError
+from django.core.paginator import Paginator
 from django.db.models.query_utils import Q
-from django.http import JsonResponse, HttpResponseServerError
+from django.http import JsonResponse
 from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 
+from blog.ffe_utils import get_daily_q, get_random_q, send_message
+from blog.models import BlogPost, Category, MusicTrack
 
 from .forms import ContactForm
-from blog.models import BlogPost, Category, MusicTrack
-from blog.ffe_utils import get_daily_q, get_random_q, send_message, update_FFE, get_FFE
-
 
 cache = TTLCache(maxsize=128, ttl=60 * 60 * 2)
 year_var = datetime.now().strftime('%Y')
@@ -65,7 +64,7 @@ def blog(request):
 
 
 def blog_posts(request):
-    posts = BlogPost.objects.all().order_by('-date')[:3]
+    posts = BlogPost.objects.all().order_by('-date')[:4]
     recent_posts = BlogPost.objects.all()[:5]
     categories = Category.objects.all()
     response = render(
