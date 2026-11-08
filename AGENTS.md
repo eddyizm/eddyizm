@@ -108,49 +108,14 @@ This is a single Django project with a `main/` app and a `blog/` app. There is n
 
 ## graphify
 
-This project has a knowledge graph at `graphify-out/` with god nodes, community structure, and cross-file relationships.
+This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
 
-### Build the graph
-```bash
-graphify extract .
-graphify cluster-only .          # generate GRAPH_REPORT.md + graph.json
-graphify update .                # after any code change, keeps graph current
-```
+When the user types `/graphify`, use the installed graphify skill or instructions before doing anything else.
 
-### How to query
-- `graphify query "<question>"` — broad search (default when graph.json exists)
-- `graphify path "<A>" "<B>"` — relationship between two nodes
-- `graphify explain "<concept>"` — focused concept lookup
-- Results are scoped to a subgraph, typically small.
-
-### Known findings (from `graphify cluster-only .`)
-- **143 nodes, 189 edges, 14 communities** (4 thin communities omitted)
-- **God nodes**: `BlogPost` (13 edges), `Category` (11 edges), `BlogPostTests` (8 edges), `MusicTrack` (5 edges), `Author` (5 edges), `t()` (4 edges), `ContactForm` (3 edges), `AboutpageTests` (3 edges), `BlogHomePageTests` (3 edges), `ProjectsCFCTests` (3 edges)
-- **Key connections**: `blog_category()` → `BlogPost` (views → models); `BlogPostTests` → `Author`, `BlogPost`, `Category` (tests → models)
-- **No import cycles** detected
-- **Extract rate**: 93% EXTRACTED, 7% INFERRED, 0% AMBIGUOUS
-
-### When to skip graphify
-- Only skip if the task is about stale or incorrect graph output
-- Do not skip for routine codebase questions
-
-### Read `graphify-out/GRAPH_REPORT.md` for broad architecture review
-- Use `graphify path` or `graphify explain` for focused queries when the report isn't enough
-
-### After modifying code
-Always run `graphify update .` (AST-only, no API cost) to keep the graph current.
-
-### Additional graphify commands
-```bash
-# List all communities
-graphify cluster-only .
-
-# Get node details
-graphify query "BlogPost"
-
-# Get relationships between two nodes
-graphify path "BlogPost" "Category"
-
-# Get the most connected nodes
-graphify god-nodes .
-```
+Rules:
+- When graphify-out/graph.json exists, run `graphify query "<question>"` before your first grep, search or source-file read for a codebase question, and put this rule in every subagent prompt that explores code. Read raw files only for lines the graph or an earlier read already located. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
+- Dirty graphify-out/ files are expected after hooks or incremental updates; dirty graph files are not a reason to skip graphify. Only skip graphify if the task is about stale or incorrect graph output, or the user explicitly says not to use it.
+- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
+- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
+- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+- A committed graphify-out/graph.json is rewritten whole on every build, so a large diff to it in a pull request is expected. Do not flag it as churn or suggest skipping the graph rebuild or its hooks.
